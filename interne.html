@@ -7,7 +7,7 @@
 <script>
 const $=s=>document.querySelector(s);
 async function init(){const{data:{session}}=await sb.auth.getSession();$('#lg').hidden=!!session;$('#ed').hidden=!session;if(session)build()}
-$('#lg').onsubmit=async e=>{e.preventDefault();const{error}=await sb.auth.signInWithPassword({email:$('#em').value,password:$('#pw').value});if(error)$('#lm').textContent='Identifiants refusés.';else init()};
+$('#lg').onsubmit=async e=>{e.preventDefault();const{error}=await sb.auth.signInWithPassword({email:$('#em').value,password:$('#pw').value});if(!window.__CFG||!window.__CFG.key)$('#lm').textContent='Config manquante : SUPABASE_URL / SUPABASE_ANON_KEY non définies dans Vercel (ou /api/config introuvable).';else if(error)$('#lm').textContent='Connexion refusée : '+error.message;else init()};
 $('#lo').onclick=async()=>{await sb.auth.signOut();init()};
 async function build(){
 const C={},r=await sb.from('site_content').select('key,value');(r.data||[]).forEach(x=>C[x.key]=x.value);

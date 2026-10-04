@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Espace interne</title><link rel="stylesheet" href="style.css"></head>
+<body data-page="admin"><div class="w" style="max-width:760px;padding-top:40px;padding-bottom:80px">
+<h1 style="font-size:34px">Espace interne</h1>
+<form id="lg" class="ad"><input id="em" type="email" placeholder="Email" required><input id="pw" type="password" placeholder="Mot de passe" required><button class="cta">Se connecter</button><p id="lm" class="fn"></p></form>
+<div id="ed" hidden><div class="bar"><button class="cta" id="sv">Enregistrer</button><button class="pb" id="lo">Se déconnecter</button><span id="sm" class="fn" style="margin:0"></span></div><div id="fl"></div><h3 style="margin-top:40px">Liste d’attente <span id="wc"></span></h3><pre id="wl"></pre></div></div>
+<script src="/api/config"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="site.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+async function init(){const{data:{session}}=await sb.auth.getSession();$('#lg').hidden=!!session;$('#ed').hidden=!session;if(session)build()}
+$('#lg').onsubmit=async e=>{e.preventDefault();const{error}=await sb.auth.signInWithPassword({email:$('#em').value,password:$('#pw').value});if(error)$('#lm').textContent='Identifiants refusés.';else init()};
+$('#lo').onclick=async()=>{await sb.auth.signOut();init()};
+async function build(){
+const C={},r=await sb.from('site_content').select('key,value');(r.data||[]).forEach(x=>C[x.key]=x.value);
+const fl=$('#fl');fl.innerHTML='';
+for(const k in D){const v=C[k]??D[k],l=document.createElement('label'),shot=k.startsWith('shot');l.textContent=shot?k+' (capture d’écran)':k;
+const f=document.createElement(shot?'input':'textarea');f.dataset.k=k;f.value=v;
+if(shot){f.placeholder='URL, ou envoyez un fichier ci-dessous';const u=document.createElement('input');u.type='file';u.accept='image/*';
+u.onchange=async()=>{const n=k+'-'+Date.now();const{error}=await sb.storage.from('site').upload(n,u.files[0]);if(error)return $('#sm').textContent='Envoi impossible : '+error.message;f.value=sb.storage.from('site').getPublicUrl(n).data.publicUrl;$('#sm').textContent='Image envoyée. Pensez à enregistrer.'};l.append(f,u)}
+else{f.rows=v.length>70?3:1;l.append(f)}
+fl.append(l)}
+const w=await sb.from('waitlist').select('email').order('created_at',{ascending:false});
+$('#wc').textContent=w.data?'('+w.data.length+')':'';$('#wl').textContent=(w.data||[]).map(x=>x.email).join('\n')}
+$('#sv').onclick=async()=>{const rows=[...document.querySelectorAll('[data-k]')].map(f=>({key:f.dataset.k,value:f.value}));const{error}=await sb.from('site_content').upsert(rows,{onConflict:'key'});$('#sm').textContent=error?'Échec : '+error.message:'Enregistré.'};
+init();
+</script></body></html>

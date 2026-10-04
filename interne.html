@@ -1,25 +1,97 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Espace interne</title><link rel="stylesheet" href="style.css"></head>
-<body data-page="admin"><div class="w" style="max-width:760px;padding-top:40px;padding-bottom:80px">
-<h1 style="font-size:34px">Espace interne</h1>
-<form id="lg" class="ad"><input id="em" type="email" placeholder="Email" required><input id="pw" type="password" placeholder="Mot de passe" required><button class="cta">Se connecter</button><p id="lm" class="fn"></p></form>
-<div id="ed" hidden><div class="bar"><button class="cta" id="sv">Enregistrer</button><button class="pb" id="lo">Se déconnecter</button><span id="sm" class="fn" style="margin:0"></span></div><div id="fl"></div><h3 style="margin-top:40px">Liste d’attente <span id="wc"></span></h3><pre id="wl"></pre></div></div>
-<script src="/api/config"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="site.js"></script>
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Espace interne · Correspondances</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap');
+:root{--bg:#090E20;--side:#0A1030;--card:#141B2E;--line:#232B45;--tx:#EEF1FA;--mu:#8C97B8;--gold:#E8B84A;--blue:#16215E}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sora',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+button,input,textarea{font:inherit;color:inherit}[hidden]{display:none!important}
+aside{position:fixed;inset:0 auto 0 0;width:72px;background:var(--side);border-right:1px solid var(--line);transition:width .25s;overflow:hidden;display:flex;flex-direction:column;z-index:5}
+aside:hover{width:260px}
+.lg{height:96px;display:flex;align-items:center;gap:16px;padding:0 24px;border-bottom:1px solid var(--line);font-weight:700;white-space:nowrap}
+.lg i{color:var(--gold);font-size:22px;width:24px;text-align:center}
+nav{flex:1;padding:14px 10px;display:grid;gap:6px;align-content:start}
+nav button,.sb a,.sb button{display:flex;align-items:center;gap:18px;width:100%;padding:0 16px;height:48px;border-radius:14px;border:0;background:none;cursor:pointer;color:var(--mu);font-weight:600;white-space:nowrap;text-decoration:none;font-size:15px}
+nav button i{width:24px;text-align:center;font-size:18px}
+nav button:hover,nav button.on{background:var(--card);color:var(--tx)}nav button.on i{color:var(--gold)}
+.sb{padding:14px 10px;border-top:1px solid var(--line);display:grid;gap:6px;white-space:nowrap}
+.sb p{text-align:center;font-size:13px;color:var(--mu);height:0;opacity:0;transition:.2s}aside:hover .sb p{height:auto;opacity:1;padding-bottom:6px}
+.sb b{color:var(--gold)}.sb a,.sb button{border:1px solid var(--line);height:42px;font-size:14px;color:var(--tx)}
+.sb i{width:24px;text-align:center}
+main{margin-left:72px;padding:48px clamp(20px,5vw,72px) 80px;max-width:1100px}
+h1{font-size:32px;letter-spacing:-.02em}.sub{color:var(--mu);margin:8px 0 28px;font-size:14px}
+.clk{color:var(--mu);margin:14px 0 26px;font-size:15px}.clk i{color:var(--gold);margin-right:6px}.clk b{color:#aab3d6}
+.note{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:26px 30px;border-radius:28px;background:linear-gradient(120deg,var(--blue),#4a4b63);margin-bottom:18px}
+.note h3{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}.note p{font-style:italic;color:#cfd5ee;white-space:pre-wrap}
+.note textarea{width:100%;min-width:260px;background:#0a1030aa;border:1px solid var(--line);border-radius:12px;padding:12px}
+.row{display:flex;align-items:center;gap:20px;padding:22px 26px;border-radius:26px;background:var(--card);border:1px solid var(--line);margin-bottom:16px}
+.row p{flex:1;font-size:17px}.row b{font-size:22px}
+.ic{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#a9b0c4,#6c7490);display:grid;place-items:center;font-size:22px}
+.b{padding:12px 20px;border-radius:14px;border:1px solid #3a4468;background:none;cursor:pointer;font-weight:700;font-size:14px;display:inline-block}
+.b:hover{background:#ffffff10}.gold{background:var(--gold);color:#101428;border-color:var(--gold)}
+.tiles{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+.tiles a,.tiles button{width:136px;height:92px;border-radius:20px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;align-content:center;gap:8px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;color:var(--tx)}
+.tiles i{color:var(--gold);font-size:22px}.tiles a:hover,.tiles button:hover{border-color:var(--gold)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px 26px;margin-bottom:18px}
+.card h3{margin-bottom:6px}
+label{display:grid;gap:6px;margin-top:14px;font-size:12.5px;color:var(--mu)}
+textarea,.ad input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#0c1226;resize:vertical}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.pv{aspect-ratio:9/19;border-radius:22px;background:#0c1226;border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;color:var(--mu);font-size:13px;margin:14px 0}
+.pv img{width:100%;height:100%;object-fit:cover}.shots .b{margin-right:8px;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:12px 8px;border-top:1px solid var(--line)}th{color:var(--mu);font-weight:600;border:0}
+#login{min-height:100vh;display:grid;place-items:center;padding:20px}
+#login form{width:min(400px,100%);display:grid;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:34px}
+#login h1{font-size:24px}#lm{color:#ff9d9d;font-size:13px;min-height:18px}
+#toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,30px);background:var(--gold);color:#101428;font-weight:700;padding:12px 22px;border-radius:99px;opacity:0;transition:.3s;z-index:9}#toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:700px){main{margin-left:56px}aside{width:56px}.row{flex-wrap:wrap}}
+</style></head>
+<body data-page="admin">
+<div id="login"><form class="ad" id="lg"><h1><i class="fa-solid fa-lock" style="color:var(--gold)"></i> Espace interne</h1><input id="em" type="email" placeholder="Email" required><input id="pw" type="password" placeholder="Mot de passe" required><button class="b gold">Se connecter</button><p id="lm"></p></form></div>
+<div id="app" hidden>
+<aside><div class="lg"><i class="fa-solid fa-bus"></i>Correspondances</div><nav id="nv"></nav>
+<div class="sb"><p>Connecté : <b id="who"></b></p><a href="index.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i>Voir le site</a><button id="lo"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</button></div></aside>
+<main id="mn"></main></div><div id="toast"></div>
+<script src="/api/config"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="site.js"></script>
 <script>
-const $=s=>document.querySelector(s);
-async function init(){const{data:{session}}=await sb.auth.getSession();$('#lg').hidden=!!session;$('#ed').hidden=!session;if(session)build()}
-$('#lg').onsubmit=async e=>{e.preventDefault();const{error}=await sb.auth.signInWithPassword({email:$('#em').value,password:$('#pw').value});if(!window.__CFG||!window.__CFG.key)$('#lm').textContent='Config manquante : SUPABASE_URL / SUPABASE_ANON_KEY non définies dans Vercel (ou /api/config introuvable).';else if(error)$('#lm').textContent='Connexion refusée : '+error.message;else init()};
+const $=s=>document.querySelector(s),C={};let W=[],name='',tm;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const v=k=>C[k]??D[k]??'';
+const N=[['home','fa-house','Accueil'],['textes','fa-pen-to-square','Textes du site'],['captures','fa-mobile-screen','Captures d’écran'],['liste','fa-envelope','Liste d’attente'],['params','fa-gear','Paramètres']];
+const grp=k=>/^(hero|cta)/.test(k)?'Accueil':/^d\d/.test(k)?'Démo de l’app':/^f\d/.test(k)?'Fonctionnalités':/^a\./.test(k)?'À propos':/^[qr]\d/.test(k)?'Aide':/^c\./.test(k)?'Contact':/^m\./.test(k)?'Mentions légales':null;
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2600)};
+async function save(rows){const{error}=await sb.from('site_content').upsert(rows,{onConflict:'key'});if(!error)rows.forEach(r=>C[r.key]=r.value);toast(error?'Échec : '+error.message:'Enregistré.');return !error}
+const row=(i,h,g,l)=>`<div class="row"><span class="ic"><i class="fa-solid ${i}"></i></span><p>${h}</p><button class="b" data-go="${g}">${l}</button></div>`;
+const V={
+home(){const sh=[1,2,3].filter(i=>C['shot'+i]).length,tx=Object.keys(C).filter(k=>k in D&&!k.startsWith('shot')).length;
+return `<h1>${new Date().getHours()<18?'Bonjour':'Bonsoir'}, ${esc(name)}</h1><p class="clk"><i class="fa-solid fa-clock"></i>Il est actuellement <b id="clk"></b></p>
+<div class="note"><div><h3><i class="fa-solid fa-note-sticky"></i> Notes — rappels</h3><p id="np">${esc(C['admin.notes']||'Aucune note pour le moment.')}</p></div><button class="b" id="ne"><i class="fa-solid fa-pen"></i> Modifier</button></div>
+${row('fa-envelope',`Vous avez <b>${W.length}</b> inscrit(s) en liste d’attente`,'liste','Voir la liste')}
+${row('fa-mobile-screen',`<b>${sh}</b> capture(s) sur 3 en ligne`,'captures','Voir les captures')}
+${row('fa-pen',`<b>${tx}</b> texte(s) personnalisé(s)`,'textes','Voir les textes')}
+<div class="tiles">${N.slice(1).map(n=>`<button data-go="${n[0]}"><i class="fa-solid ${n[1]}"></i>${n[2].split(' ')[0]}</button>`).join('')}<a href="index.html" target="_blank"><i class="fa-solid fa-globe"></i>Site</a></div>`},
+textes(){const g={};Object.keys(D).forEach(k=>{const n=grp(k);if(n)(g[n]=g[n]||[]).push(k)});
+return `<h1>Textes du site</h1><p class="sub">Un champ non modifié garde le texte par défaut.</p>`+Object.entries(g).map(([n,ks])=>`<section class="card"><h3>${n}</h3>${ks.map(k=>`<label>${k}<textarea data-k="${k}" rows="${v(k).length>70?3:1}">${esc(v(k))}</textarea></label>`).join('')}</section>`).join('')+`<button class="b gold" id="sv">Enregistrer les textes</button>`},
+captures(){return `<h1>Captures d’écran</h1><p class="sub">Elles défilent dans le téléphone de l’accueil, dans cet ordre.</p><div class="shots">${[1,2,3].map(i=>`<section class="card"><h3>Capture ${i}</h3><div class="pv">${C['shot'+i]?`<img src="${esc(C['shot'+i])}" alt="">`:'<span>Aucune image</span>'}</div><label class="b" style="display:inline-block;cursor:pointer;color:var(--tx);margin-top:0">${C['shot'+i]?'Remplacer':'Choisir une image'}<input type="file" accept="image/*" data-up="${i}" hidden></label>${C['shot'+i]?`<button class="b" data-rm="${i}">Retirer</button>`:''}</section>`).join('')}</div>`},
+liste(){return `<h1>Liste d’attente</h1><p class="sub">${W.length} inscrit(s)</p><section class="card"><button class="b gold" id="csv"><i class="fa-solid fa-download"></i> Exporter en CSV</button><table style="margin-top:14px"><tr><th>Email</th><th>Inscription</th></tr>${W.map(w=>`<tr><td>${esc(w.email)}</td><td>${new Date(w.created_at).toLocaleString('fr-FR')}</td></tr>`).join('')||'<tr><td colspan=2>Personne pour l’instant.</td></tr>'}</table></section>`},
+params(){return `<h1>Paramètres</h1><section class="card" style="margin-top:24px"><h3>Compte</h3><p class="sub">Connecté : ${esc(name)}</p><button class="b" id="rf"><i class="fa-solid fa-rotate"></i> Actualiser les données</button></section>`}
+};
+function bind(){
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+if($('#clk')){const t=()=>$('#clk').textContent=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});t();clearInterval(tm);tm=setInterval(t,15000)}
+if($('#ne'))$('#ne').onclick=()=>{$('#np').outerHTML=`<textarea id="nt" rows="4">${esc(C['admin.notes']||'')}</textarea>`;$('#ne').textContent='Enregistrer';$('#ne').onclick=async()=>{if(await save([{key:'admin.notes',value:$('#nt').value}]))go('home')}};
+if($('#sv'))$('#sv').onclick=()=>save([...document.querySelectorAll('[data-k]')].map(f=>({key:f.dataset.k,value:f.value})));
+document.querySelectorAll('[data-up]').forEach(f=>f.onchange=async()=>{const k='shot'+f.dataset.up,n=k+'-'+Date.now();const{error}=await sb.storage.from('site').upload(n,f.files[0]);if(error)return toast('Envoi impossible : '+error.message);if(await save([{key:k,value:sb.storage.from('site').getPublicUrl(n).data.publicUrl}]))go('captures')});
+document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=async()=>{if(await save([{key:'shot'+b.dataset.rm,value:''}]))go('captures')});
+if($('#csv'))$('#csv').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['email,date\n'+W.map(w=>w.email+','+w.created_at).join('\n')],{type:'text/csv'}));a.download='liste-attente.csv';a.click()};
+if($('#rf'))$('#rf').onclick=async()=>{await load();toast('Données actualisées.')};
+}
+function go(p){if(!V[p])p='home';location.hash=p;$('#nv').innerHTML=N.map(n=>`<button data-go="${n[0]}" class="${n[0]===p?'on':''}"><i class="fa-solid ${n[1]}"></i>${n[2]}</button>`).join('');$('#mn').innerHTML=V[p]();bind()}
+async function load(){const r=await sb.from('site_content').select('key,value');Object.keys(C).forEach(k=>delete C[k]);(r.data||[]).forEach(x=>C[x.key]=x.value);const w=await sb.from('waitlist').select('email,created_at').order('created_at',{ascending:false});W=w.data||[]}
+async function init(){const{data:{session}}=await sb.auth.getSession();$('#login').hidden=!!session;$('#app').hidden=!session;if(!session)return;
+const n=session.user.user_metadata?.prenom||session.user.email.split('@')[0];name=n[0].toUpperCase()+n.slice(1);$('#who').textContent=name;await load();go(location.hash.slice(1)||'home')}
+$('#lg').onsubmit=async e=>{e.preventDefault();if(!window.__CFG||!window.__CFG.key)return $('#lm').textContent='Config manquante : SUPABASE_URL / SUPABASE_ANON_KEY (Vercel).';const{error}=await sb.auth.signInWithPassword({email:$('#em').value,password:$('#pw').value});if(error)$('#lm').textContent='Connexion refusée : '+error.message;else init()};
 $('#lo').onclick=async()=>{await sb.auth.signOut();init()};
-async function build(){
-const C={},r=await sb.from('site_content').select('key,value');(r.data||[]).forEach(x=>C[x.key]=x.value);
-const fl=$('#fl');fl.innerHTML='';
-for(const k in D){const v=C[k]??D[k],l=document.createElement('label'),shot=k.startsWith('shot');l.textContent=shot?k+' (capture d’écran)':k;
-const f=document.createElement(shot?'input':'textarea');f.dataset.k=k;f.value=v;
-if(shot){f.placeholder='URL, ou envoyez un fichier ci-dessous';const u=document.createElement('input');u.type='file';u.accept='image/*';
-u.onchange=async()=>{const n=k+'-'+Date.now();const{error}=await sb.storage.from('site').upload(n,u.files[0]);if(error)return $('#sm').textContent='Envoi impossible : '+error.message;f.value=sb.storage.from('site').getPublicUrl(n).data.publicUrl;$('#sm').textContent='Image envoyée. Pensez à enregistrer.'};l.append(f,u)}
-else{f.rows=v.length>70?3:1;l.append(f)}
-fl.append(l)}
-const w=await sb.from('waitlist').select('email').order('created_at',{ascending:false});
-$('#wc').textContent=w.data?'('+w.data.length+')':'';$('#wl').textContent=(w.data||[]).map(x=>x.email).join('\n')}
-$('#sv').onclick=async()=>{const rows=[...document.querySelectorAll('[data-k]')].map(f=>({key:f.dataset.k,value:f.value}));const{error}=await sb.from('site_content').upsert(rows,{onConflict:'key'});$('#sm').textContent=error?'Échec : '+error.message:'Enregistré.'};
 init();
 </script></body></html>

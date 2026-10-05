@@ -3,7 +3,7 @@ const API=((window.__CFG||{}).url||'')+'/functions/v1/admin';
 let T=sessionStorage.getItem('t'),me={},C={},W=[],S={},tm;
 const ER={refuse:'Accès refusé : aucun rôle autorisé sur le serveur Discord.',etat:'Connexion expirée, réessayez.',discord:'Discord a refusé la connexion.',base:'Erreur de base de données : le SQL a-t-il été exécuté ?'};
 if(location.hash.startsWith('#t=')){T=location.hash.slice(3);sessionStorage.setItem('t',T);history.replaceState(0,'',location.pathname)}
-const err=location.hash.startsWith('#e=')?location.hash.slice(3):'';if(err)history.replaceState(0,'',location.pathname);
+const hp=new URLSearchParams(location.hash.slice(1)),err=hp.get('e')||'',detail=hp.get('m')||'';if(err)history.replaceState(0,'',location.pathname);
 async function api(action,p={}){const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+T},body:JSON.stringify({action,...p})});
 if(r.status===401){sessionStorage.removeItem('t');T=null;location.reload();throw new Error('Session expirée')}const d=await r.json();if(!r.ok)throw new Error(d.erreur||'Erreur');return d}
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2800)};
@@ -40,5 +40,5 @@ $('#nv').innerHTML=N.map(n=>`<button data-go="${n[0]}" class="${n[0]===p?'on':''
 $('#mn').innerHTML=V[p]();bind()}
 $('#dc').href=API+'?a=login';$('#bg').onclick=()=>$('aside').classList.toggle('open');
 $('#lo').onclick=async()=>{try{await api('deconnexion')}catch{}sessionStorage.removeItem('t');location.reload()};
-(async()=>{if(err)$('#lm').textContent=ER[err]||'Connexion impossible.';
+(async()=>{if(err)$('#lm').textContent=(ER[err]||'Connexion impossible.')+(detail?' ['+detail+']':'');
 if(!T)return;try{me=await api('moi');$('#login').hidden=true;$('#app').hidden=false;$('#who').textContent=me.nom;$('#rl').textContent=me.role;await charger();go(location.hash.slice(1)||'home')}catch(e){$('#lm').textContent=e.message}})();

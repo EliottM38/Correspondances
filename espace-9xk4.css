@@ -35,3 +35,6 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;p
 #bg{display:none}#toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,30px);background:var(--ac);color:var(--ink);font-weight:700;padding:12px 22px;border-radius:99px;opacity:0;transition:.3s;z-index:9}#toast.on{opacity:1;transform:translate(-50%,0)}
 @media(max-width:760px){aside{transform:translateX(-100%);width:268px;transition:transform .25s}aside.open{transform:none}aside .l{opacity:1;max-width:200px}main{margin-left:0;padding-top:78px}.row{flex-wrap:wrap}
 #bg{display:grid;place-items:center;position:fixed;top:14px;left:14px;width:44px;height:44px;border-radius:14px;border:1px solid var(--line);background:var(--card);z-index:7;cursor:pointer}}
+input:not([type=checkbox]):not([type=file]),select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg)}
+input:focus,select:focus{outline:2px solid var(--ac)}input[type=checkbox]{width:18px;height:18px;accent-color:var(--ac)}
+.row .b+.b{margin-left:-8px}

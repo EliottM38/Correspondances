@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap');
-:root{--bg:#0A1220;--card:#121E33;--tx:#EAF0FA;--mu:#8497B5;--ac:#3DDC97;--f:'Sora',system-ui,sans-serif}
-:root[data-theme=light]{--bg:#F5F7FB;--card:#fff;--tx:#0B1420;--mu:#5A6B87;--ac:#0F9D63}
+:root{--bg:#0F1B2D;--card:#17273F;--tx:#EAF0FA;--mu:#7C93B3;--ac:#3DDC97;--f:'Sora',system-ui,sans-serif}
+:root[data-theme=light]{--bg:#F1F5FA;--card:#fff;--tx:#0B1420;--mu:#5A6B87;--ac:#0F9D63}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--f);background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden}

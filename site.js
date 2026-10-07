@@ -17,13 +17,17 @@ const D={
 'c.p':'Une question, une idée, un bug ? Écrivez-nous.','c.mail':'a-completer@exemple.fr',
 'm.t':'Mentions légales','m.p':'À compléter.'
 };
+// Texte des articles : **gras**, *italique*, ## titre, - liste, > encadré, [lien](https://…)
+const escHtml=s=>String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const mdIn=t=>t.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\*(.+?)\*/g,'<i>$1</i>').replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+const md=s=>escHtml(s).split(/\n{2,}/).map(b=>/^## /.test(b)?`<h2>${mdIn(b.slice(3))}</h2>`:/^(- .*(\n|$))+$/.test(b)?`<ul>${b.trim().split('\n').map(l=>`<li>${mdIn(l.slice(2))}</li>`).join('')}</ul>`:/^&gt; /.test(b)?`<blockquote>${mdIn(b.replace(/^&gt; ?/gm,''))}</blockquote>`:`<p>${mdIn(b).replace(/\n/g,'<br>')}</p>`).join('');
 const P=document.body.dataset.page;
 if(P!=='admin')(async()=>{
 const C={};
 try{const r=await Promise.race([sb.from('site_content').select('key,value'),new Promise((_,j)=>setTimeout(j,2500))]);(r.data||[]).forEach(x=>C[x.key]=x.value)}catch(e){}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const t=k=>C[k]??D[k]??'',E=k=>esc(t(k));
-const links=[['index.html','Accueil','home'],['fonctionnalites.html','Fonctionnalités','fonct'],['a-propos.html','À propos','apropos'],['aide.html','Aide','aide'],['contact.html','Contact','contact']];
+const links=[['index.html','Accueil','home'],['fonctionnalites.html','Fonctionnalités','fonct'],['a-propos.html','À propos','apropos'],['actualites.html','Actualités','actus'],['aide.html','Aide','aide'],['contact.html','Contact','contact']];
 const pages={
 home:()=>`<section class="hero"><h1>${E('hero.t').split(' ').map((w,i)=>`<span style="animation-delay:${.1+i*.09}s">${w}</span>`).join(' ')}</h1><p>${E('hero.p')}</p><form class="wl"><input type="email" placeholder="Votre email" required><button class="cta">${E('cta')}</button></form><p class="fn">${E('hero.note')}</p></section>
 <section class="demo"><div class="di w"><div class="dc"><h2 id="dt"></h2><p id="dp"></p></div><div class="ph">${[1,2,3].map(i=>t('shot'+i)?`<img class="s" src="${E('shot'+i)}" alt="">`:`<div class="s e">Capture ${i}</div>`).join('')}</div></div></section>`,
@@ -31,6 +35,8 @@ fonct:()=>[1,2,3,4].map(i=>`<section class="fr w"><h2>${E('f'+i+'.t')}</h2><p>${
 apropos:()=>`<section class="pg w"><h2>${E('a.t')}</h2><p>${E('a.p')}</p></section>`,
 aide:()=>`<section class="pg w"><h2>Aide</h2>${[1,2].map(i=>`<details><summary>${E('q'+i)}</summary><p>${E('r'+i)}</p></details>`).join('')}</section>`,
 contact:()=>`<section class="pg w"><h2>Contact</h2><p>${E('c.p')}</p><p><a href="mailto:${E('c.mail')}" style="color:var(--ac)">${E('c.mail')}</a></p></section>`,
+actus:()=>`<section class="pg w"><h2>Actualités</h2><div class="cards" id="al"><p>Chargement…</p></div></section>`,
+actu:()=>`<section class="pg w art"><div id="ar"><p>Chargement…</p></div></section>`,
 mentions:()=>`<section class="pg w"><h2>${E('m.t')}</h2><p>${E('m.p')}</p></section>`
 };
 document.title='Correspondances';
@@ -43,4 +49,12 @@ if(P==='home'){
 const demo=document.querySelector('.demo'),sc=[...document.querySelectorAll('.s')],dt=document.getElementById('dt'),dp=document.getElementById('dp');let cur=-1;
 const up=()=>{const r=demo.getBoundingClientRect(),tot=demo.offsetHeight-innerHeight;const i=tot>0?Math.min(2,Math.max(0,Math.floor(-r.top/tot*3))):0;if(i===cur)return;cur=i;sc.forEach((s,k)=>s.classList.toggle('on',k===i));dt.textContent=t('d'+(i+1)+'.t');dp.textContent=t('d'+(i+1)+'.p')};
 addEventListener('scroll',up,{passive:true});up()}
+const TAGS={nouveaute:'Nouveauté',travaux:'Travaux',info:'Info',version:'Mise à jour'};
+const jour=d=>new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+if(P==='actus'){const{data}=await sb.from('actualites').select('id,titre,categorie,version,publie_le').order('publie_le',{ascending:false});
+document.getElementById('al').innerHTML=(data||[]).map(a=>`<a class="card-a" href="actualite.html?id=${a.id}"><span class="tag">${esc(TAGS[a.categorie]||'Info')}${a.version?' '+esc(a.version):''}</span><h3>${esc(a.titre)}</h3><small>${jour(a.publie_le)}</small></a>`).join('')||'<p>Aucune actualité pour l’instant.</p>'}
+if(P==='actu'){const el=document.getElementById('ar');const{data:a}=await sb.from('actualites').select('*').eq('id',new URLSearchParams(location.search).get('id')).maybeSingle();
+if(!a){el.innerHTML='<p>Article introuvable.</p>';return}
+document.title=a.titre+' · Correspondances';
+el.innerHTML=`<span class="tag">${esc(TAGS[a.categorie]||'Info')}${a.version?' '+esc(a.version):''}</span><h2>${esc(a.titre)}</h2><small>${jour(a.publie_le)}</small>${a.image_url?`<img src="${esc(a.image_url)}" alt="">`:''}${md(a.contenu)}${a.testflight?`<p><a class="cta" href="${esc(a.testflight)}">Rejoindre la bêta TestFlight</a></p>`:''}<p><a href="actualites.html" style="color:var(--ac)">← Toutes les actualités</a></p>`}
 })();

@@ -49,3 +49,6 @@ nav{scrollbar-width:none}nav::-webkit-scrollbar{display:none}
 aside{width:68px}aside:hover,aside.open{width:248px}main{margin-left:68px;padding:36px clamp(18px,4vw,56px) 70px;max-width:1040px}
 .lg{height:72px;padding:0 22px}nav{padding:10px 8px;gap:3px}nav button,.sb a,.sb button{height:40px;font-size:14px;padding:0 14px;border-radius:12px}
 nav i,.sb i{font-size:16px}.sb{padding:10px 8px;gap:5px}.sb a,.sb button{height:38px;font-size:13px}}
+
+#pv{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:6px 16px 16px;min-height:60px}#pv p,#pv li{margin-top:12px;line-height:1.6}#pv h2{margin-top:16px;font-size:20px}#pv a{color:var(--ac)}#pv ul{padding-left:22px}
+#pv blockquote{margin-top:14px;padding:12px 16px;border-radius:14px;background:#3ddc9722;border-left:4px solid var(--ac)}

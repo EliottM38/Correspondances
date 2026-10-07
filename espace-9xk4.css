@@ -52,3 +52,10 @@ nav i,.sb i{font-size:16px}.sb{padding:10px 8px;gap:5px}.sb a,.sb button{height:
 
 #pv{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:6px 16px 16px;min-height:60px}#pv p,#pv li{margin-top:12px;line-height:1.6}#pv h2{margin-top:16px;font-size:20px}#pv a{color:var(--ac)}#pv ul{padding-left:22px}
 #pv blockquote{margin-top:14px;padding:12px 16px;border-radius:14px;background:#3ddc9722;border-left:4px solid var(--ac)}
+
+.tag{display:inline-block;padding:3px 11px;border-radius:99px;background:var(--ac);color:var(--ink);font-size:12px;font-weight:700;margin-top:10px}
+#pv img,#pva img{width:100%;border-radius:14px;margin-top:12px}
+.phone{width:300px;max-width:100%;margin:14px auto 0;background:var(--bg);border:7px solid #000;border-radius:38px;padding:20px 18px 22px;box-shadow:0 20px 50px -20px #000}
+.phone h3{font-size:20px;margin:10px 0 4px;letter-spacing:-.02em}.phone p,.phone li{font-size:14px;line-height:1.55;margin-top:10px}.phone h2{font-size:17px;margin-top:14px}
+.phone blockquote{margin-top:12px;padding:10px 14px;border-radius:12px;background:#3ddc9724;border-left:4px solid var(--ac)}.phone blockquote p{margin:0}
+.tfb{margin-top:16px;padding:10px;border-radius:99px;background:var(--ac);color:var(--ink);font-weight:700;font-size:13px;text-align:center}.tfb.o{background:none;color:var(--tx);border:1px solid var(--mu)}

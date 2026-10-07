@@ -45,3 +45,10 @@ label{display:grid;gap:6px;margin:14px 0;font-size:12.5px;color:var(--mu)}
 .bar{position:sticky;top:0;padding:14px 0;background:var(--bg);display:flex;gap:12px;align-items:center;z-index:5}
 pre{white-space:pre-wrap;color:var(--mu);font-size:13px}
 @media(prefers-reduced-motion:reduce){h1 span{animation:none;opacity:1;filter:none;transform:none}.s{transition:none}}
+
+.cards{display:grid;gap:14px;margin-top:28px}.card-a{display:block;background:var(--card);border:1px solid color-mix(in srgb,var(--tx) 10%,transparent);border-radius:22px;padding:22px;transition:transform .25s,border-color .25s}
+.card-a:hover{transform:translateY(-3px);border-color:var(--ac)}.card-a h3{margin:12px 0 6px;font-size:21px;letter-spacing:-.02em}.card-a small,.art small{color:var(--mu)}
+.tag{display:inline-block;padding:4px 12px;border-radius:99px;background:var(--ac);color:#0B1420;font-size:12px;font-weight:700}
+.art h2{margin-top:14px}.art small{display:block;margin-top:10px}.art p,.art li{color:var(--tx);font-size:17px;line-height:1.7;margin-top:16px}.art ul{padding-left:22px;margin-top:8px}
+.art h2+small+*,.art img{margin-top:22px}.art img{width:100%;border-radius:22px}.art a{color:var(--ac)}.art a.cta{color:#0B1420}
+.art blockquote{margin-top:22px;padding:16px 20px;border-radius:18px;background:color-mix(in srgb,var(--ac) 14%,transparent);border-left:4px solid var(--ac)}.art blockquote p{margin:0}

@@ -59,3 +59,9 @@ nav i,.sb i{font-size:16px}.sb{padding:10px 8px;gap:5px}.sb a,.sb button{height:
 .phone h3{font-size:20px;margin:10px 0 4px;letter-spacing:-.02em}.phone p,.phone li{font-size:14px;line-height:1.55;margin-top:10px}.phone h2{font-size:17px;margin-top:14px}
 .phone blockquote{margin-top:12px;padding:10px 14px;border-radius:12px;background:#3ddc9724;border-left:4px solid var(--ac)}.phone blockquote p{margin:0}
 .tfb{margin-top:16px;padding:10px;border-radius:99px;background:var(--ac);color:var(--ink);font-weight:700;font-size:13px;text-align:center}.tfb.o{background:none;color:var(--tx);border:1px solid var(--mu)}
+
+/* Filtres, glisser-déposer, tri */
+.dz{outline:2px dashed var(--ac);outline-offset:-6px;background:#3ddc9718}
+th[title="Trier"]:hover{color:var(--tx)}
+input[type=search]{width:100%}
+select{color:var(--tx)}

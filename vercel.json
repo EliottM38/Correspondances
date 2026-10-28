@@ -1,4 +1,9 @@
 {
-  "rewrites": [{ "source": "/espace-9xk4", "destination": "/espace-9xk4.html" }],
+  "rewrites": [
+    { "source": "/espace-9xk4", "destination": "/espace-9xk4.html" },
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    { "source": "/rss.xml", "destination": "/api/rss" },
+    { "source": "/robots.txt", "destination": "/api/robots" }
+  ],
   "headers": [{ "source": "/espace-9xk4(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }]
 }

@@ -15,16 +15,17 @@ else T=lireTok();
 const hp=new URLSearchParams(location.hash.slice(1)),err=hp.get('e')||'',detail=hp.get('m')||'';if(err)history.replaceState(0,'',location.pathname);
 function sortir(msg){ST_.del('t');ST_.del('ts');T=null;clearInterval(tm);if(msg)sessionStorage.setItem('msg',msg);location.reload()}
 async function api(action,p={}){
-const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+T},body:JSON.stringify({action,...p})});
+const t0=performance.now();const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+T},body:JSON.stringify({action,...p})});
 if(r.status===401){sortir('Session expirée : reconnectez-vous.');throw new Error('Session expirée')}
-const d=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(d.erreur||'Erreur ('+r.status+')');e.status=r.status;throw e}
+const d=await r.json().catch(()=>({}));mesure(action,performance.now()-t0);if(!r.ok){const e=new Error(d.erreur||'Erreur ('+r.status+')');e.status=r.status;throw e}
 if(/_(ecrire|supprimer|envoyer|deconnecter)$/.test(action))CA[cur]=0;if(action!=='moi')verif();return d}
-// Contrôle du rôle en arrière-plan : à chaque action (au plus toutes les 4 s)
+const MS={};function mesure(a,ms){MS[a]=Math.round(ms);const e=$('#ms');if(e){const v=Object.values(MS);e.textContent='Serveur : '+Math.round(v.reduce((x,y)=>x+y,0)/v.length)+' ms en moyenne';e.title=Object.entries(MS).map(x=>x[0]+' '+x[1]+' ms').join('\n')}}
+// Contrôle du rôle en arrière-plan : à chaque action ()
 async function verif(force){
-if(!T||!me.role)return;const n=Date.now();if(!force&&n-lastV<4000)return;lastV=n;
+if(!T||!me.role)return;const n=Date.now();if(!force&&n-lastV<20000)return;lastV=n;
 try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+T},body:JSON.stringify({action:'moi'})});
 if(r.status===401||r.status===403)return sortir('Votre accès a été retiré.');if(!r.ok)return;
-const m=await r.json();if(m.role!==me.role||m.nom!==me.nom){const ancien=me.role;me=m;majMoi();buildNav();toast(ancien!==m.role?'Votre rôle est maintenant : '+m.role:'Profil mis à jour');
+const m=await r.json();if(m.role!==me.role||m.nom!==me.nom){const ancien=me.role;me=m;h2=0;majMoi();buildNav();toast(ancien!==m.role?'Votre rôle est maintenant : '+m.role:'Profil mis à jour');
 const n2=N.find(x=>x[0]===cur);if(!n2||(n2[3]&&!isAdm()))location.hash='home';else show(cur)}}catch{}}
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),3200)};
 const can=()=>me.role!=='lecture';
@@ -130,9 +131,11 @@ function logoCard(code,nom){const u=LG[code];return`<div class="card"><b>${esc(n
 // Données de chaque page (lues en parallèle)
 const setRG=l=>{RG={};(l||[]).forEach(x=>RG[x.cle]=x.valeur);majMt()};
 const contenu=async()=>{const r=await api('contenu_lire');C={};r.forEach(x=>C[x.key]=x.value)};
-async function loadHome(){const j={s:api('stats'),ser:api('stats_series'),g:api('signalements_lire'),av:api('avis_stats')};if(isAdm()){j.u=api('utilisateurs_lire');j.f=api('familles_lire');j.rg=api('reglages_lire')}
-const k=Object.keys(j),r=await Promise.allSettled(k.map(x=>j[x]));k.forEach((x,i)=>{if(r[i].status==='fulfilled')H[x]=r[i].value});
-if(!H.s&&!H.ser)throw r[0].reason||new Error('Aucune donnée');S=H.s||{};ST=H.ser||{};if(H.rg)setRG(H.rg);H.t=Date.now()}
+async function loadHome(){const r=await Promise.allSettled([api('stats'),api('stats_series')]);if(r[0].status==='fulfilled')H.s=r[0].value;if(r[1].status==='fulfilled')H.ser=r[1].value;
+if(!H.s&&!H.ser)throw r[0].reason||new Error('Aucune donnée');S=H.s||{};ST=H.ser||{};H.t=Date.now();loadHome2()}
+// Le reste (listes, interrupteur) arrive juste après, sans bloquer l'affichage ; au plus une fois par minute
+let h2=0;async function loadHome2(){if(Date.now()-h2<6e4)return;h2=Date.now();const j={g:api('signalements_lire'),av:api('avis_stats')};if(isAdm()){j.u=api('utilisateurs_lire');j.f=api('familles_lire');j.rg=api('reglages_lire')}
+const k=Object.keys(j),r=await Promise.allSettled(k.map(x=>j[x]));k.forEach((x,i)=>{if(r[i].status==='fulfilled')H[x]=r[i].value});if(H.rg)setRG(H.rg);if(cur==='home'&&$('#hm')&&!ed){$('#hm').innerHTML=homeHtml();bind()}}
 const parseLogos=d=>{LG={};if(Array.isArray(d))d.forEach(x=>{const k=x.reseau||x.code||x.cle,i=x.image||x.logo;if(k&&i)LG[k]=i});else if(d&&typeof d==='object')Object.keys(d).forEach(k=>{const i=d[k]&&d[k].image||d[k];if(typeof i==='string')LG[k]=i})};
 const LD={home:loadHome,textes:contenu,captures:contenu,liste:async()=>{W=await api('waitlist_lire')},
 actus:async()=>{AC=await api('actus_lire')},annonces:async()=>{A=await api('annonces_lire')},
@@ -212,9 +215,10 @@ $('#lo').onclick=async()=>{try{await api('deconnexion')}catch{}sortir()};
 if(err)$('#lm').textContent=(ER[err]||'Connexion impossible.')+(detail?' ['+detail+']':'');
 if(!T)return;
 // L'identité et le tableau de bord sont demandés en même temps
+$('#login').hidden=true;$('#app').hidden=false;$('#pt').textContent='Chargement…';$('#mn').innerHTML='<p class="sub">Chargement…</p>';
 if(route()==='home')loadHome().then(()=>{CA.home=1},()=>{});
-try{me=await api('moi')}catch(e){$('#lm').textContent=e.message;return}
-$('#login').hidden=true;$('#app').hidden=false;majMoi();buildNav();
+try{me=await api('moi')}catch(e){$('#app').hidden=true;$('#login').hidden=false;$('#lm').textContent=e.message;return}
+majMoi();buildNav();
 // Le menu, les boutons précédent/suivant et les liens fonctionnent tous par l'adresse (#page)
 addEventListener('hashchange',()=>{ed=null;$('#app').classList.remove('open');verif();show(route())});
 show(route());

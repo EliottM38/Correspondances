@@ -14,75 +14,178 @@ const D={
 'a.t':'Fait à Grenoble.','a.p':'Correspondances est né d’un constat simple : les applications s’arrêtent à l’arrêt de bus, pas votre trajet.',
 'q1':'Quand l’app sera-t-elle disponible ?','r1':'Bientôt à Grenoble. Laissez votre email pour être prévenu·e.',
 'q2':'L’app est-elle gratuite ?','r2':'Oui. L’app est gratuite et sans publicité.',
+'q3':'Mes données sont-elles protégées ?','r3':'Votre position reste sur votre téléphone, sauf si vous lancez un partage de trajet. Vous choisissez quand et avec qui.',
+'q4':'Puis-je suivre le trajet de mon enfant ?','r4':'Oui, avec son accord. Un enfant est informé du partage avec ses parents et peut l’arrêter : ses parents en sont alors prévenus.',
+'q5':'Quels réseaux sont couverts ?','r5':'Nous commençons par la région grenobloise ; d’autres réseaux viendront ensuite.',
+'q6':'Comment vous contacter ?','r6':'Depuis la page Contact : une question, une idée ou un bug, nous lisons tout.',
+'maj':'7 novembre 2026',
 'c.p':'Une question, une idée, un bug ? Écrivez-nous.','c.mail':'a-completer@exemple.fr',
 'm.t':'Mentions légales','m.p':'**Éditeur** : Correspondances est un projet édité à titre non professionnel par une personne physique, dont l’identité a été communiquée à l’hébergeur conformément à l’article 6 de la loi pour la confiance dans l’économie numérique.\n\n**Contact** : via la page Contact.\n\n**Hébergement du site** : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis.\n\n**Hébergement des données de l’application** : Supabase.\n\n**Données personnelles** : voir la politique de confidentialité.',
-'p.t':'Politique de confidentialité','p.p':'Dernière mise à jour : octobre 2026.\n\n## Qui est responsable ?\nCorrespondances est édité à titre non professionnel (voir les mentions légales). Pour toute question sur vos données, écrivez-nous depuis la page Contact.\n\n## Les données que nous traitons\n- **Compte** : prénom, adresse e-mail, mot de passe (conservé sous forme chiffrée, jamais en clair), statut adulte ou enfant, année de naissance pour un enfant, code ami.\n- **Relations** : vos amis, et les liens entre parents et enfants.\n- **Position** : elle sert à afficher les arrêts proches et à vous guider, directement sur votre téléphone. Elle n’est envoyée à nos serveurs que si vous lancez un partage de trajet, partagez anonymement votre véhicule, ou publiez un signalement.\n- **Avis** : réponses aux questions posées à bord, enregistrées sans lien avec votre compte.\n- **Sur votre téléphone uniquement** : favoris, historique des trajets, lignes suivies et réglages.\n\n## Le partage de position\nVous choisissez quand et avec qui. Le partage s’arrête à l’arrivée, à la descente, ou quand vous l’arrêtez. Un enfant est informé du partage avec ses parents et peut l’arrêter : ses parents en sont alors prévenus.\n\n## Mineurs\nLe compte est ouvert dès 13 ans. Avant 15 ans, l’accord d’un parent est nécessaire.\n\n## Services tiers\nLes horaires et itinéraires viennent des données ouvertes de M (SMMAG), la recherche de lieux et les cartes d’Apple Plans, et la météo (pour choisir les questions) d’Open-Meteo. Ces services reçoivent les coordonnées nécessaires à leur réponse. Nos données sont hébergées par Supabase, et ce site par Vercel.\n\n## Conservation\nVotre compte et ses données sont conservés jusqu’à sa suppression. Les positions partagées en direct ne servent que pendant le partage. Les signalements expirent au bout de 2 heures.\n\n## Vos droits\nVous pouvez accéder à vos données, les corriger, les supprimer, vous opposer à leur traitement ou demander leur portabilité. Vous pouvez supprimer votre compte à tout moment dans l’app (Plus > Profil > Supprimer mon compte). En cas de désaccord, vous pouvez saisir la CNIL (cnil.fr).\n\n## Sécurité\nLes échanges sont chiffrés (HTTPS) et l’identifiant de session est conservé dans le Trousseau sécurisé de l’iPhone.'
+'p.t':'Politique de confidentialité','p.p':'## Qui est responsable ?\nCorrespondances est édité à titre non professionnel (voir les mentions légales). Pour toute question sur vos données, écrivez-nous depuis la page Contact.\n\n## Les données que nous traitons\n- **Compte** : prénom, adresse e-mail, mot de passe (conservé sous forme chiffrée, jamais en clair), statut adulte ou enfant, année de naissance pour un enfant, code ami.\n- **Liste d’attente** : l’adresse e-mail que vous nous laissez sur ce site pour être prévenu·e de l’ouverture.\n- **Relations** : vos amis, et les liens entre parents et enfants.\n- **Position** : elle sert à afficher les arrêts proches et à vous guider, directement sur votre téléphone. Elle n’est envoyée à nos serveurs que si vous lancez un partage de trajet, partagez anonymement votre véhicule, ou publiez un signalement.\n- **Avis** : réponses aux questions posées à bord, enregistrées sans lien avec votre compte.\n- **Sur votre téléphone uniquement** : favoris, historique des trajets, lignes suivies et réglages.\n\n## Cookies et mesure de provenance\nCe site ne dépose aucun cookie publicitaire. Il retient dans votre navigateur votre choix de thème (clair ou sombre) et votre réponse au bandeau cookies. Si vous acceptez, nous conservons aussi les paramètres du lien par lequel vous êtes arrivé·e (utm_source, utm_medium, utm_campaign…) pour savoir quelles actions font connaître l’application ; ils peuvent être associés à votre adresse e-mail si vous rejoignez la liste d’attente. Vous pouvez changer d’avis à tout moment avec « Gérer les cookies » en bas de page.\n\n## Le partage de position\nVous choisissez quand et avec qui. Le partage s’arrête à l’arrivée, à la descente, ou quand vous l’arrêtez. Un enfant est informé du partage avec ses parents et peut l’arrêter : ses parents en sont alors prévenus.\n\n## Mineurs\nLe compte est ouvert dès 13 ans. Avant 15 ans, l’accord d’un parent est nécessaire.\n\n## Services tiers\nLes horaires et itinéraires viennent des données ouvertes de M (SMMAG), la recherche de lieux et les cartes d’Apple Plans, et la météo (pour choisir les questions) d’Open-Meteo. Ces services reçoivent les coordonnées nécessaires à leur réponse. Nos données sont hébergées par Supabase, et ce site par Vercel.\n\n## Conservation\nVotre compte et ses données sont conservés jusqu’à sa suppression. Les positions partagées en direct ne servent que pendant le partage. Les signalements expirent au bout de 2 heures.\n\n## Vos droits\nVous pouvez accéder à vos données, les corriger, les supprimer, vous opposer à leur traitement ou demander leur portabilité. Vous pouvez supprimer votre compte à tout moment dans l’app (Plus > Profil > Supprimer mon compte). En cas de désaccord, vous pouvez saisir la CNIL (cnil.fr).\n\n## Sécurité\nLes échanges sont chiffrés (HTTPS) et l’identifiant de session est conservé dans le Trousseau sécurisé de l’iPhone.'
 };
 // Texte des articles : **gras**, *italique*, ## titre, - liste, > encadré, [lien](https://…)
 const escHtml=s=>String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
 const mdIn=t=>t.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\*(.+?)\*/g,'<i>$1</i>').replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
 const md=s=>escHtml(s).split(/\n{2,}/).map(b=>/^## /.test(b)?`<h2>${mdIn(b.slice(3))}</h2>`:/^(- .*(\n|$))+$/.test(b)?`<ul>${b.trim().split('\n').map(l=>`<li>${mdIn(l.slice(2))}</li>`).join('')}</ul>`:/^&gt; /.test(b)?`<blockquote>${mdIn(b.replace(/^&gt; ?/gm,''))}</blockquote>`:`<p>${mdIn(b).replace(/\n/g,'<br>')}</p>`).join('');
-// Pages légales : les titres de section restent modestes (les h2 des pages sont très grands)
+// Pages légales : les titres de section restent modestes
 const mdL=s=>md(s).replace(/<h2>/g,'<h3 style="margin-top:30px;font-size:20px">').replace(/<\/h2>/g,'</h3>');
-// Le logo, dessiné en SVG : u = identifiant unique des dégradés, tuile = fond arrondi, anim = tracé animé (accueil)
+
+// Tout le reste vit dans cette fonction : aucun nom global de plus pour la page interne
+if(document.body.dataset.page!=='admin')(async()=>{
+const P=document.body.dataset.page,root=document.documentElement,B=document.body;
+const store=n=>{try{const o=window[n];return{g:k=>{try{return o.getItem(k)}catch(e){return null}},s:(k,v)=>{try{o.setItem(k,v)}catch(e){}},d:k=>{try{o.removeItem(k)}catch(e){}}}}catch(e){return{g:()=>null,s(){},d(){}}}};
+const ls=store('localStorage'),ss=store('sessionStorage');
+const calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+root.lang='fr';root.dataset.theme=ls.g('theme')==='light'?'light':'dark';
+// Logo dessiné en SVG : u = identifiant unique des dégradés, tuile = fond arrondi, anim = tracé animé
 const mark=(u,tuile,anim)=>{
-const P=[['M17 36C21 27 31 22 38.5 26.5','p'],['M82 21C70 20 67 30 66 38C65 45 60 49 53 51','a'],['M46 50C33 50 24.5 57 24.5 69V77.5','ab'],['M28 78.5H48.4','b1'],['M53 51C56 56 62 58.5 70 58.5H82','b2']];
+const Pa=[['M17 36C21 27 31 22 38.5 26.5','p'],['M82 21C70 20 67 30 66 38C65 45 60 49 53 51','a'],['M46 50C33 50 24.5 57 24.5 69V77.5','ab'],['M28 78.5H48.4','b1'],['M53 51C56 56 62 58.5 70 58.5H82','b2']];
 const N=[[16.2,38.2,'#EE93B3'],[82.9,20.1,'#F5B84B'],[85.8,57.5,'#4C93E6'],[20.8,77.5,'#F5B84B'],[52.9,51,'#061636']];
 const T=[[43.7,30.1,'#F4A3C1'],[47.7,35.2,'#F5B84B'],[50.8,40.8,'#A99BF0'],[63.7,64.8,'#F4A3C1'],[59.7,70.4,'#F0A0BE'],[54,75,'#8FC1FF']];
 const g=(id,x1,y1,x2,y2,a,b,c)=>`<linearGradient id="${u}${id}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"><stop offset="0" stop-color="${a}"/>${c?`<stop offset=".5" stop-color="${c}"/>`:''}<stop offset="1" stop-color="${b}"/></linearGradient>`;
-return`<svg viewBox="0 0 100 100" aria-hidden="true"><defs>${g('p',0,1,1,0,'#E88FB0','#F7B9CE')}${g('a',0,1,1,0,'#F2A93B','#F9C463')}${g('ab',0,0,0,1,'#FBCB6E','#4C93E6','#A8C4F2')}${g('b1',0,0,1,0,'#8FC1FF','#3F7FD6')}${g('b2',0,0,1,0,'#3F7FD6','#7DB4F5')}</defs>${tuile?'<rect x="1" y="1" width="98" height="98" rx="27" fill="#061636" stroke="#123A7A" stroke-width="1.2"/>':''}<g fill="none" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">${P.map(p=>`<path ${anim?'class="d" pathLength="1" ':''}d="${p[0]}" stroke="url(#${u}${p[1]})"/>`).join('')}</g>${T.map(d=>`<circle ${anim?'class="dt" ':''}cx="${d[0]}" cy="${d[1]}" r="2.4" fill="${d[2]}"/>`).join('')}<g stroke="#fff" stroke-width="2.2">${N.map(d=>`<circle ${anim?'class="nd" ':''}cx="${d[0]}" cy="${d[1]}" r="6" fill="${d[2]}"/>`).join('')}</g></svg>`};
-const ICO=['<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 000-7h-11a3.5 3.5 0 010-7H15"/><circle cx="18" cy="5" r="3"/>',
-'<circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 010 8.49m-8.48-.01a6 6 0 010-8.49m11.31-2.82a10 10 0 010 14.14m-14.14 0a10 10 0 010-14.14"/>',
-'<path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>',
-'<path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 003.4 0"/>'];
-const COL=['var(--amber)','var(--pink)','var(--blue)','var(--lav)'];
-const P=document.body.dataset.page;
-if(P!=='admin')(async()=>{
+return`<svg viewBox="0 0 100 100" aria-hidden="true"><defs>${g('p',0,1,1,0,'#E88FB0','#F7B9CE')}${g('a',0,1,1,0,'#F2A93B','#F9C463')}${g('ab',0,0,0,1,'#FBCB6E','#4C93E6','#A8C4F2')}${g('b1',0,0,1,0,'#8FC1FF','#3F7FD6')}${g('b2',0,0,1,0,'#3F7FD6','#7DB4F5')}</defs>${tuile?'<rect x="1" y="1" width="98" height="98" rx="27" fill="#061636" stroke="#123A7A" stroke-width="1.2"/>':''}<g fill="none" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">${Pa.map(p=>`<path ${anim?'class="d" pathLength="1" ':''}d="${p[0]}" stroke="url(#${u}${p[1]})"/>`).join('')}</g>${T.map(d=>`<circle ${anim?'class="dt" ':''}cx="${d[0]}" cy="${d[1]}" r="2.4" fill="${d[2]}"/>`).join('')}<g stroke="#fff" stroke-width="2.2">${N.map(d=>`<circle ${anim?'class="nd" ':''}cx="${d[0]}" cy="${d[1]}" r="6" fill="${d[2]}"/>`).join('')}</g></svg>`};
+// Écran de chargement (une seule fois par visite)
+const first=!calm&&!ss.g('sp'),t0=Date.now();
+if(first){ss.s('sp','1');B.insertAdjacentHTML('afterbegin',`<div class="sp" aria-hidden="true">${mark('s',1,1)}</div>`)}
+// Contenu modifiable
 const C={};
-try{const r=await Promise.race([sb.from('site_content').select('key,value'),new Promise((_,j)=>setTimeout(j,2500))]);(r.data||[]).forEach(x=>C[x.key]=x.value)}catch(e){}
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const t=k=>C[k]??D[k]??'',E=k=>esc(t(k));
+try{const r=await Promise.race([sb.from('site_content').select('key,value'),new Promise((_,j)=>setTimeout(j,1800))]);(r.data||[]).forEach(x=>C[x.key]=x.value)}catch(e){}
+const t=k=>C[k]??D[k]??'',E=k=>escHtml(t(k));
+// Icônes
+const svg=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const IC={
+sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>',
+moon:'<path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/>',
+search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
+menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',close:'<path d="M6 6l12 12M18 6L6 18"/>',
+mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+copy:'<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/>',
+print:'<path d="M6 9V3h12v6M6 18H4a1 1 0 01-1-1v-6a2 2 0 012-2h14a2 2 0 012 2v6a1 1 0 01-1 1h-2"/><rect x="6" y="14" width="12" height="7"/>',
+share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4.2M8.6 13.4l6.8 4.2"/>'};
+const tb=(a,i,l)=>`<button type="button" class="tb" ${a}>${svg(IC[i])}<span class="lb">${l}</span></button>`;
+const COL=['var(--pink)','var(--amber)','var(--blue)','var(--lav)'];
 const links=[['index.html','Accueil','home'],['fonctionnalites.html','Fonctionnalités','fonct'],['a-propos.html','À propos','apropos'],['actualites.html','Actualités','actus'],['aide.html','Aide','aide'],['contact.html','Contact','contact']];
-const form=()=>`<form class="wl"><input type="email" placeholder="Votre email" aria-label="Votre email" required><button class="cta">${E('cta')}</button></form>`;
-const bar3=()=>'<div class="bar3"><i style="background:var(--pink)"></i><i style="background:var(--amber)"></i><i style="background:var(--blue)"></i></div>';
+const form=id=>`<form class="wl" novalidate><div class="row"><label class="sr" for="em${id}">Votre email</label><input id="em${id}" type="email" name="email" placeholder="Votre email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="cta" type="submit"><span>${E('cta')}</span></button></div><p class="fm" role="alert" aria-live="polite"></p></form>`;
+const eb=(l,c)=>`<div class="eb"${c?` style="--c:${c}"`:''}>${l}</div>`;
+const maj=()=>`<p class="up">Mis à jour le ${E('maj')}</p>`;
+const faq=n=>`<div class="fq">${[1,2,3,4,5,6].filter(i=>i<=n&&t('q'+i)).map(i=>`<div class="qa" id="q${i}"><h3><button type="button" aria-expanded="false" aria-controls="a${i}">${E('q'+i)}<span class="pl"></span></button></h3><div class="an" id="a${i}" role="region"><div><p>${E('r'+i)}</p></div></div></div>`).join('')}</div>`;
+const route=[['Arrêt Gare','Quai 3, tram A','var(--pink)'],['À bord','Descendre dans 4 arrêts','var(--amber)'],['Sortie','Côté nord, escalier de gauche','var(--lav)'],['À pied','Rue à gauche, 120 m','var(--blue)'],['Votre porte','Arrivée à 8 h 42','var(--amber)']];
 const pages={
 home:()=>{const ws=t('hero.t').split(' ');
-return`<section class="hero"><div class="hm">${mark('h',0,1)}</div><h1>${ws.map((w,i)=>`<span class="${i>=ws.length-2?'g':''}" style="animation-delay:${.1+i*.09}s">${esc(w)}</span>`).join(' ')}</h1><p>${E('hero.p')}</p>${form()}<p class="fn">${E('hero.note')}</p></section>
+return`<div class="w hero"><div><h1>${ws.map((w,i)=>`<span class="${i>=ws.length-2?'u':''}" style="animation-delay:${.08+i*.08}s">${escHtml(w)}</span>`).join(' ')}</h1><p class="lead">${E('hero.p')}</p>${form('h')}<p class="fn">${E('hero.note')}</p></div><div class="rt" aria-hidden="true"><div class="cap">Exemple de trajet</div><ol>${route.map((r,i)=>`<li style="--c:${r[2]};--i:${i}"><b>${r[0]}</b><small>${r[1]}</small></li>`).join('')}</ol></div></div>
 <section class="demo"><div class="di w"><div class="dc"><h2 id="dt"></h2><p id="dp"></p><div class="pr"><i style="--c:var(--pink)"></i><i style="--c:var(--amber)"></i><i style="--c:var(--blue)"></i></div></div><div class="ph">${[1,2,3].map(i=>t('shot'+i)?`<img class="s" src="${E('shot'+i)}" alt="">`:`<div class="s e">Capture ${i}</div>`).join('')}</div></div></section>
-<section class="sec w"><h2 class="t rv">${E('f1.t')}</h2><div class="fg">${[1,2,3,4].map(i=>`<article class="fc rv" style="--c:${COL[i-1]}"><div class="ico"><svg viewBox="0 0 24 24">${ICO[i-1]}</svg></div><h3>${E('f'+i+'.t')}</h3><p>${E('f'+i+'.p')}</p></article>`).join('')}</div><a class="more rv" href="fonctionnalites.html">Tout découvrir <span>→</span></a></section>
-<section class="w"><div class="band rv"><h2>${E('hero.t')}</h2>${form()}<p class="fn">${E('hero.note')}</p></div></section>`},
-fonct:()=>`<div class="tl">${[1,2,3,4].map(i=>`<section class="fr rv" style="--c:${COL[i-1]}"><span class="nd"></span><div class="k">0${i}</div><h2>${E('f'+i+'.t')}</h2><p>${E('f'+i+'.p')}</p></section>`).join('')}</div>`,
-apropos:()=>`<section class="pg w rv">${bar3()}<h2>${E('a.t')}</h2><p>${E('a.p')}</p></section>`,
-aide:()=>`<section class="pg w rv">${bar3()}<h2>Aide</h2><div style="margin-top:34px">${[1,2].map(i=>`<details><summary>${E('q'+i)}</summary><p>${E('r'+i)}</p></details>`).join('')}</div></section>`,
+<section class="sec w">${eb('Ce que fait l’app')}<h2 class="t rv">${E('f1.t')}</h2><div class="fl">${[1,2,3,4].map(i=>`<article class="fi rv" style="--c:${COL[i-1]}"><div class="k">0${i}</div><h3>${E('f'+i+'.t')}</h3><p>${E('f'+i+'.p')}</p></article>`).join('')}</div><a class="more" href="fonctionnalites.html">Tout découvrir <span>→</span></a></section>
+<section class="sec w">${eb('Questions fréquentes','var(--blue)')}<h2 class="t rv">Une question ?</h2>${faq(4)}<a class="more" href="aide.html">Toute l’aide <span>→</span></a></section>
+<section class="w"><div class="band rv"><h2>${E('hero.t')}</h2><div>${form('b')}<p class="fn">${E('hero.note')}</p></div></div></section>`},
+fonct:()=>`<div class="tl">${[1,2,3,4].map(i=>`<section class="fr rv" style="--c:${COL[i-1]}"><span class="nd"></span><div class="k">0${i}</div><h2>${E('f'+i+'.t')}</h2><p>${E('f'+i+'.p')}</p></section>`).join('')}${maj()}<div class="tools">${tb('data-print','print','Imprimer')}</div></div>`,
+apropos:()=>`<section class="pg w rv">${eb('À propos')}<h2>${E('a.t')}</h2><p>${E('a.p')}</p>${maj()}</section>`,
+aide:()=>`<section class="pg w">${eb('Aide','var(--blue)')}<h2>Questions fréquentes</h2>${faq(6)}<p style="margin-top:36px">Votre question n’y est pas ? <a class="more" style="margin:0" href="contact.html">Écrivez-nous</a></p>${maj()}<div class="tools">${tb('data-print','print','Imprimer')}</div></section>`,
 // Tant que l'adresse de contact est la valeur par défaut, on ne l'affiche pas comme un vrai lien
-contact:()=>{const m=t('c.mail'),ok=m&&!/exemple\.fr$/.test(m);return`<section class="pg w rv">${bar3()}<h2>Contact</h2><p>${E('c.p')}</p><p>${ok?`<a class="mail" href="mailto:${E('c.mail')}">${E('c.mail')}</a>`:'Adresse de contact bientôt disponible.'}</p></section>`},
-actus:()=>`<section class="pg w">${bar3()}<h2>Actualités</h2><div class="cards" id="al"><p>Chargement…</p></div></section>`,
+contact:()=>{const m=t('c.mail'),ok=m&&!/exemple\.fr$/.test(m);return`<section class="pg w rv">${eb('Contact','var(--pink)')}<h2>Contact</h2><p>${E('c.p')}</p><p>${ok?`<a class="mail" href="mailto:${E('c.mail')}">${E('c.mail')}</a>`:'Adresse de contact bientôt disponible.'}</p>${ok?`<div class="tools">${tb(`data-copy="${E('c.mail')}"`,'copy','Copier l’adresse')}</div>`:''}${maj()}</section>`},
+actus:()=>`<section class="pg w">${eb('Actualités','var(--amber)')}<h2>Actualités</h2><div class="cards" id="al"><p>Chargement…</p></div></section>`,
 actu:()=>`<section class="pg w art"><div id="ar"><p>Chargement…</p></div></section>`,
-mentions:()=>`<section class="pg w art">${bar3()}<h2>${E('m.t')}</h2>${mdL(t('m.p'))}</section>`,
-confid:()=>`<section class="pg w art">${bar3()}<h2>${E('p.t')}</h2>${mdL(t('p.p'))}</section>`
+mentions:()=>`<section class="pg w art">${eb('Légal')}<h2>${E('m.t')}</h2>${mdL(t('m.p'))}${maj()}<div class="tools">${tb('data-print','print','Imprimer')}</div></section>`,
+confid:()=>`<section class="pg w art">${eb('Légal')}<h2>${E('p.t')}</h2>${mdL(t('p.p'))}${/Dernière mise à jour/.test(t('p.p'))?'':maj()}<div class="tools">${tb('data-print','print','Imprimer')}</div></section>`
 };
 const TIT={fonct:'Fonctionnalités',apropos:'À propos',actus:'Actualités',aide:'Aide',contact:'Contact',mentions:'Mentions légales',confid:'Confidentialité'};
 document.title=(TIT[P]?TIT[P]+' · ':'')+'Correspondances';
-document.head.insertAdjacentHTML('beforeend',`<meta name="description" content="${E('hero.p')}"><meta name="theme-color" content="#030E26"><link rel="icon" href="logo.svg" type="image/svg+xml">`);
-document.body.insertAdjacentHTML('afterbegin',`<header><nav class="w"><a class="br" href="index.html">${mark('b',1,0)}<span>Correspon<i>dances</i></span></a><div class="nl">${links.map(l=>`<a href="${l[0]}" class="${l[2]===P?'on':''}">${l[1]}</a>`).join('')}<button class="pb" id="th"></button></div><button class="bg" id="mn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></nav></header><main>${pages[P]()}</main><footer><div class="fb">${mark('f',1,0)}<span>© Correspondances. Fait à Grenoble.</span></div><div style="display:flex;gap:18px;flex-wrap:wrap"><a href="confidentialite.html">Confidentialité</a><a href="mentions.html">Mentions légales</a></div></footer>`);
-document.getElementById('mn').onclick=()=>document.querySelector('header').classList.toggle('open');
-const root=document.documentElement,th=document.getElementById('th');
-const setTh=m=>{root.dataset.theme=m;th.textContent=m==='light'?'Clair':'Sombre';localStorage.setItem('theme',m)};
-setTh(localStorage.getItem('theme')||'dark');th.onclick=()=>setTh(root.dataset.theme==='light'?'dark':'light');
-document.querySelectorAll('.wl').forEach(f=>f.onsubmit=async e=>{e.preventDefault();const b=f.querySelector('button');const{error}=await sb.from('waitlist').insert({email:f.querySelector('input').value.trim().toLowerCase()});b.textContent=error&&error.code!=='23505'?'Réessayer':'Merci !';if(!error||error.code==='23505')f.reset()});
-if(P==='home'){
-const demo=document.querySelector('.demo'),sc=[...document.querySelectorAll('.s')],pr=[...document.querySelectorAll('.pr i')],dt=document.getElementById('dt'),dp=document.getElementById('dp');let cur=-1;
-const up=()=>{const r=demo.getBoundingClientRect(),tot=demo.offsetHeight-innerHeight;const i=tot>0?Math.min(2,Math.max(0,Math.floor(-r.top/tot*3))):0;if(i===cur)return;cur=i;sc.forEach((s,k)=>s.classList.toggle('on',k===i));pr.forEach((p,k)=>p.classList.toggle('on',k===i));dt.textContent=t('d'+(i+1)+'.t');dp.textContent=t('d'+(i+1)+'.p')};
-addEventListener('scroll',up,{passive:true});up()}
+document.head.insertAdjacentHTML('beforeend',`<meta name="description" content="${E('hero.p')}"><meta name="theme-color" content="#071531"><meta property="og:type" content="website"><meta property="og:title" content="Correspondances"><meta property="og:description" content="${E('hero.p')}"><meta name="twitter:card" content="summary"><link rel="icon" href="logo.svg" type="image/svg+xml">`);
+B.insertAdjacentHTML('afterbegin',`<a class="skip" href="#main">Aller au contenu</a><header><div class="w nv"><a class="br" href="index.html" aria-label="Correspondances, accueil">${mark('b',1,0)}<span>Correspondances</span></a><nav id="nav" aria-label="Navigation principale">${links.map(l=>`<a href="${l[0]}"${l[2]===P?' aria-current="page"':''}>${l[1]}</a>`).join('')}</nav><div class="hb"><button type="button" class="ib" id="sr" aria-label="Rechercher sur le site">${svg(IC.search)}</button><button type="button" class="ib" id="th"><span class="i-sun">${svg(IC.sun)}</span><span class="i-moon">${svg(IC.moon)}</span></button><button type="button" class="ib bg" id="mn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span class="i-o">${svg(IC.menu)}</span><span class="i-x">${svg(IC.close)}</span></button></div></div><div class="pgb"><i></i></div></header><main id="main" tabindex="-1">${pages[P]()}</main><footer><div class="w ft"><div class="fb">${mark('f',1,0)}<span>© Correspondances · Fait à Grenoble</span></div><div class="fl2"><a href="confidentialite.html">Confidentialité</a><a href="mentions.html">Mentions légales</a><button type="button" id="ckb">Gérer les cookies</button></div></div></footer>${P==='contact'?'':`<a class="fab" href="contact.html" aria-label="Nous contacter">${svg(IC.mail)}<span>Contact</span></a>`}<div class="toasts" id="ts" aria-live="polite"></div><dialog class="sd" id="sd" aria-label="Rechercher sur le site"><div class="sq">${svg(IC.search)}<input id="sq" type="search" placeholder="Rechercher : fonctionnalités, aide, actualités…" autocomplete="off" aria-label="Rechercher"><kbd>Échap</kbd></div><ul id="sres"></ul></dialog><dialog class="dlg" id="dl" aria-labelledby="dlt"></dialog>`);
+const $=s=>document.querySelector(s),header=$('header');
+// Notifications
+const toast=(m,k)=>{const d=document.createElement('div');d.className='toast'+(k==='err'?' err':'');d.textContent=m;$('#ts').append(d);setTimeout(()=>{d.classList.add('out');setTimeout(()=>d.remove(),320)},3800)};
+// Fenêtre de confirmation
+const dl=$('#dl');dl.addEventListener('click',e=>{if(e.target===dl)dl.close()});
+const confirmDlg=(titre,txt)=>{dl.innerHTML=`<div class="chk"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23" pathLength="1"/><path d="M15 27l8 8 14-16" pathLength="1"/></svg></div><h2 id="dlt">${escHtml(titre)}</h2><p>${escHtml(txt)}</p><form method="dialog" class="ac"><button class="cta">Fermer</button></form>`;dl.showModal()};
+// Thème
+const th=$('#th');
+const setTh=m=>{root.dataset.theme=m;ls.s('theme',m);th.setAttribute('aria-label',m==='light'?'Passer en mode sombre':'Passer en mode clair');const mt=$('meta[name=theme-color]');if(mt)mt.content=m==='light'?'#F7F5F0':'#071531'};
+setTh(root.dataset.theme);th.onclick=()=>setTh(root.dataset.theme==='light'?'dark':'light');
+// Menu mobile
+const mn=$('#mn'),menu=o=>{header.classList.toggle('open',o);mn.setAttribute('aria-expanded',o);mn.setAttribute('aria-label',o?'Fermer le menu':'Ouvrir le menu');B.classList.toggle('lock',o&&innerWidth<=860)};
+mn.onclick=()=>menu(!header.classList.contains('open'));
+$('#nav').addEventListener('click',e=>{if(e.target.closest('a'))menu(false)});
+addEventListener('resize',()=>{if(innerWidth>860)menu(false)});
+// Paramètres de campagne (UTM) : transmis avec l'inscription uniquement si le visiteur a accepté
+const U={};{const q=new URLSearchParams(location.search);['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(k=>{if(q.get(k))U[k.slice(4)]=q.get(k).slice(0,60)});
+if(ls.g('ck')==='1'){try{Object.assign(U,JSON.parse(ls.g('utm')||'{}'),U)}catch(e){}if(Object.keys(U).length)ls.s('utm',JSON.stringify(U))}}
+const src=()=>ls.g('ck')==='1'?Object.entries(U).map(([k,v])=>k+'='+v).join('&').slice(0,200):'';
+// Bandeau cookies
+const ck=()=>{if($('.ck'))return;B.classList.add('ckv');B.insertAdjacentHTML('beforeend',`<div class="ck" role="dialog" aria-labelledby="ckt"><b id="ckt">Cookies</b><p>Ce site ne dépose aucun cookie publicitaire. Avec votre accord, nous retenons seulement le lien de campagne par lequel vous êtes arrivé·e, pour savoir ce qui fait connaître l’app. <a href="confidentialite.html">En savoir plus</a></p><div class="ac"><button type="button" class="cta" data-ck="1">Accepter</button><button type="button" class="tb" data-ck="0">Refuser</button></div></div>`)};
+$('#ckb').onclick=ck;
+document.addEventListener('click',e=>{const b=e.target.closest('[data-ck]');if(!b)return;const v=b.dataset.ck;ls.s('ck',v);if(v==='1'){if(Object.keys(U).length)ls.s('utm',JSON.stringify(U))}else ls.d('utm');$('.ck').remove();B.classList.remove('ckv');toast(v==='1'?'Préférence enregistrée : mesure acceptée.':'Préférence enregistrée : aucune mesure.')});
+if(ls.g('ck')===null)setTimeout(ck,first?2200:900);
+// Copier, imprimer, partager
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-copy],[data-print],[data-share]');if(!b)return;
+if(b.hasAttribute('data-print'))return print();
+if(b.hasAttribute('data-share'))return navigator.share({title:document.title,url:location.href}).catch(()=>{});
+const v=b.dataset.copy||location.href;let ok=true;
+try{await navigator.clipboard.writeText(v)}catch(x){const a=document.createElement('textarea');a.value=v;a.style.cssText='position:fixed;opacity:0';B.append(a);a.select();try{ok=document.execCommand('copy')}catch(y){ok=false}a.remove()}
+if(!ok)return toast('Copie impossible : sélectionnez le texte à la main.','err');
+const l=b.querySelector('.lb'),o=l.textContent;l.textContent='Copié';b.classList.add('done');toast('Copié dans le presse-papiers.');setTimeout(()=>{l.textContent=o;b.classList.remove('done')},2000)});
+// Formulaire de liste d'attente
+document.querySelectorAll('.wl').forEach(f=>f.addEventListener('submit',async e=>{e.preventDefault();
+const inp=f.elements.email,b=f.querySelector('button'),sp=b.querySelector('span'),m=f.querySelector('.fm'),lab=sp.textContent;
+const fail=(s,toastToo)=>{m.textContent=s;m.className='fm err';f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');inp.setAttribute('aria-invalid','true');if(toastToo)toast(s,'err')};
+inp.removeAttribute('aria-invalid');m.className='fm';m.textContent='';
+if(f.elements.website.value){f.reset();return}
+const v=inp.value.trim().toLowerCase();
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){fail('Cette adresse email ne semble pas valide. Vérifiez-la puis réessayez.');inp.focus();return}
+b.classList.add('ld');sp.textContent='Envoi…';
+let error;
+try{const s=src();let r=await sb.from('waitlist').insert(s?{email:v,source:s}:{email:v});error=r.error;
+if(error&&s&&error.code!=='23505'&&/source|column|PGRST204|42703/i.test((error.code||'')+(error.message||''))){r=await sb.from('waitlist').insert({email:v});error=r.error}}catch(x){error={code:'net'}}
+b.classList.remove('ld');sp.textContent=lab;
+if(error&&error.code!=='23505'){fail('L’inscription n’a pas abouti. Vérifiez votre connexion puis réessayez.',1);return}
+f.reset();const dup=!!error;
+m.textContent=dup?'Vous êtes déjà sur la liste.':'Inscription enregistrée.';m.className='fm good';
+confirmDlg(dup?'Vous êtes déjà inscrit·e':'C’est noté !',dup?'Cette adresse est déjà sur la liste. Vous serez prévenu·e dès l’ouverture.':'Vous serez prévenu·e dès l’ouverture. Un seul message, rien d’autre.')}));
+// FAQ dépliable
+const toggle=(q,o)=>{q.classList.toggle('open',o);q.querySelector('button').setAttribute('aria-expanded',o)};
+document.addEventListener('click',e=>{const b=e.target.closest('.qa button');if(b){const q=b.closest('.qa');toggle(q,!q.classList.contains('open'))}});
+const fromHash=()=>{const q=/^#q\d$/.test(location.hash)&&document.querySelector(location.hash);if(q){toggle(q,true);setTimeout(()=>q.scrollIntoView({block:'center'}),60)}};
+addEventListener('hashchange',fromHash);fromHash();
+// Recherche
+const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+const plain=s=>String(s).replace(/^## /gm,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/[*>]/g,'').replace(/^- /gm,'').replace(/\s+/g,' ');
+const mk=(a,b,c,d)=>({t:a,x:b,u:c,k:d,n:norm(a+' '+b),nt:norm(a)});
+let base=[mk('Accueil',t('hero.p'),'index.html','Page'),...[1,2,3,4].map(i=>mk(t('f'+i+'.t'),t('f'+i+'.p'),'fonctionnalites.html','Fonctionnalité')),mk(t('a.t'),t('a.p'),'a-propos.html','À propos'),...[1,2,3,4,5,6].filter(i=>t('q'+i)).map(i=>mk(t('q'+i),t('r'+i),'aide.html#q'+i,'Question')),mk('Contact',t('c.p'),'contact.html','Page'),mk(t('m.t'),plain(t('m.p')),'mentions.html','Légal'),mk(t('p.t'),plain(t('p.p')),'confidentialite.html','Légal')];
+let news=null,act=0;
+const sd=$('#sd'),sq=$('#sq'),sres=$('#sres');
+const run=()=>{const ts=norm(sq.value.trim()).split(/\s+/).filter(Boolean);act=0;
+if(!ts.length){sres.innerHTML=`<li class="hd">Pages</li>`+links.map(l=>`<li><a href="${l[0]}"><b>${l[1]}</b></a></li>`).join('');sres.querySelector('a').classList.add('on');return}
+const r=[...base,...(news||[])].filter(x=>ts.every(w=>x.n.includes(w))).map(x=>[x,ts.reduce((s,w)=>s+(x.nt.includes(w)?3:1),0)]).sort((a,b)=>b[1]-a[1]).slice(0,8).map(a=>a[0]);
+sres.innerHTML=r.length?r.map(x=>{const i=norm(x.x).indexOf(ts[0]),s=i>50?i-50:0,sn=x.x?(s?'…':'')+x.x.slice(s,s+140)+(x.x.length>s+140?'…':''):'';return`<li><a href="${escHtml(x.u)}"><b>${escHtml(x.t)}</b><span class="kd">${x.k}</span>${sn?`<small>${escHtml(sn)}</small>`:''}</a></li>`}).join(''):`<li class="none">Aucun résultat pour « ${escHtml(sq.value.trim())} ».</li>`;
+const a=sres.querySelector('a');if(a)a.classList.add('on')};
+const loadNews=async()=>{if(news)return;news=[];try{const{data}=await sb.from('actualites').select('id,titre,categorie').order('publie_le',{ascending:false}).limit(30);news=(data||[]).map(a=>mk(a.titre,'','actualite.html?id='+a.id,'Actualité'));if(sd.open)run()}catch(e){}};
+const openS=()=>{menu(false);if(!sd.open)sd.showModal();sq.value='';run();sq.focus();loadNews()};
+$('#sr').onclick=openS;
+sd.addEventListener('click',e=>{if(e.target===sd||e.target.closest('a'))sd.close()});
+sq.addEventListener('input',run);
+sq.addEventListener('keydown',e=>{const a=[...sres.querySelectorAll('a')];if(!a.length)return;
+if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();a[act].classList.remove('on');act=(act+(e.key==='ArrowDown'?1:a.length-1))%a.length;a[act].classList.add('on');a[act].scrollIntoView({block:'nearest'})}
+if(e.key==='Enter'){e.preventDefault();a[act].click()}});
+addEventListener('keydown',e=>{const ed=/^(INPUT|TEXTAREA)$/.test(e.target.tagName);if((e.key==='/'&&!ed&&!e.ctrlKey&&!e.metaKey)||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k')){e.preventDefault();openS()}if(e.key==='Escape')menu(false)});
+// Démo du téléphone, barre de progression, en-tête
+const pb=$('.pgb i');let up=()=>{};
+if(P==='home'){const demo=$('.demo'),sc=[...document.querySelectorAll('.s')],pr=[...document.querySelectorAll('.pr i')],dt=$('#dt'),dp=$('#dp');let cur=-1;
+up=()=>{const r=demo.getBoundingClientRect(),tot=demo.offsetHeight-innerHeight;const i=tot>0?Math.min(2,Math.max(0,Math.floor(-r.top/tot*3))):0;if(i===cur)return;cur=i;sc.forEach((s,k)=>s.classList.toggle('on',k===i));pr.forEach((p,k)=>p.classList.toggle('on',k===i));dt.textContent=t('d'+(i+1)+'.t');dp.textContent=t('d'+(i+1)+'.p')}}
+const onS=()=>{const m=document.documentElement.scrollHeight-innerHeight;pb.style.transform=`scaleX(${m>0?Math.min(1,scrollY/m):0})`;up()};
+addEventListener('scroll',onS,{passive:true});addEventListener('resize',onS);onS();
+// Apparition douce au défilement
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+const reveal=()=>document.querySelectorAll('.rv:not(.in)').forEach(n=>io.observe(n));reveal();
+// Fin du chargement
+if(first){await wait(Math.max(0,1500-(Date.now()-t0)));const s=$('.sp');s.classList.add('out');setTimeout(()=>s.remove(),600)}
+B.classList.add('go');
+// Actualités
 const TAGS={nouveaute:'Nouveauté',travaux:'Travaux',info:'Info',version:'Mise à jour'};
 const jour=d=>new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
 if(P==='actus'){const{data}=await sb.from('actualites').select('id,titre,categorie,version,publie_le').order('publie_le',{ascending:false});
-document.getElementById('al').innerHTML=(data||[]).map(a=>`<a class="card-a" href="actualite.html?id=${a.id}"><span class="tag">${esc(TAGS[a.categorie]||'Info')}${a.version?' '+esc(a.version):''}</span><h3>${esc(a.titre)}</h3><small>${jour(a.publie_le)}</small></a>`).join('')||'<p>Aucune actualité pour l’instant.</p>'}
-if(P==='actu'){const el=document.getElementById('ar');const{data:a}=await sb.from('actualites').select('*').eq('id',new URLSearchParams(location.search).get('id')).maybeSingle();
+$('#al').innerHTML=(data||[]).map(a=>`<a class="card-a" href="actualite.html?id=${a.id}"><span class="tag">${escHtml(TAGS[a.categorie]||'Info')}${a.version?' '+escHtml(a.version):''}</span><h3>${escHtml(a.titre)}</h3><small>${jour(a.publie_le)}</small></a>`).join('')||'<p>Aucune actualité pour l’instant.</p>'}
+if(P==='actu'){const el=$('#ar');const{data:a}=await sb.from('actualites').select('*').eq('id',new URLSearchParams(location.search).get('id')).maybeSingle();
 if(!a){el.innerHTML='<p>Article introuvable.</p>';return}
 document.title=a.titre+' · Correspondances';
-el.innerHTML=`<span class="tag">${esc(TAGS[a.categorie]||'Info')}${a.version?' '+esc(a.version):''}</span><h2>${esc(a.titre)}</h2><small>${jour(a.publie_le)}</small>${a.image_url?`<img src="${esc(a.image_url)}" alt="">`:''}${md(a.contenu)}${a.testflight?`<p><a class="cta" href="${esc(a.testflight)}">Rejoindre la bêta TestFlight</a></p>`:''}<p><a href="actualites.html">← Toutes les actualités</a></p>`}
-// Apparition douce des blocs au défilement
-const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
-document.querySelectorAll('.rv').forEach(n=>io.observe(n));
+el.innerHTML=`<span class="tag">${escHtml(TAGS[a.categorie]||'Info')}${a.version?' '+escHtml(a.version):''}</span><h2>${escHtml(a.titre)}</h2><small>Publié le ${jour(a.publie_le)}</small>${a.image_url?`<img src="${escHtml(a.image_url)}" alt="">`:''}${md(a.contenu)}${a.testflight?`<p><a class="cta" href="${escHtml(a.testflight)}">Rejoindre la bêta TestFlight</a></p>`:''}<div class="tools">${tb('data-copy','copy','Copier le lien')}${navigator.share?tb('data-share','share','Partager'):''}${tb('data-print','print','Imprimer')}</div><p><a href="actualites.html">← Toutes les actualités</a></p>`;reveal()}
 })();

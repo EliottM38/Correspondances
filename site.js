@@ -41,10 +41,15 @@ root.lang='fr';root.dataset.theme=ls.g('theme')==='light'?'light':'dark';
 // Logo dessiné en SVG : u = identifiant unique des dégradés, tuile = fond arrondi, anim = tracé animé
 const mark=(u,tuile,anim)=>{
 const Pa=[['M17 36C21 27 31 22 38.5 26.5','p'],['M82 21C70 20 67 30 66 38C65 45 60 49 53 51','a'],['M46 50C33 50 24.5 57 24.5 69V77.5','ab'],['M28 78.5H48.4','b1'],['M53 51C56 56 62 58.5 70 58.5H82','b2']];
-const N=[[16.2,38.2,'#EE93B3'],[82.9,20.1,'#F5B84B'],[85.8,57.5,'#4C93E6'],[20.8,77.5,'#F5B84B'],[52.9,51,'#061636']];
-const T=[[43.7,30.1,'#F4A3C1'],[47.7,35.2,'#F5B84B'],[50.8,40.8,'#A99BF0'],[63.7,64.8,'#F4A3C1'],[59.7,70.4,'#F0A0BE'],[54,75,'#8FC1FF']];
+const N=[[16.2,38.2,'np'],[82.9,20.1,'na'],[85.8,57.5,'nb'],[20.8,77.5,'na'],[52.9,51,'#061A3D']];
+const T=[[43.7,30.1,'#F4A3C1'],[47.7,35.2,'#F5B84B'],[50.8,40.8,'#A99BF0'],[63.7,64.8,'#E887B0'],[59.7,70.4,'#E48DB6'],[54,75,'#8FC1FF']];
 const g=(id,x1,y1,x2,y2,a,b,c)=>`<linearGradient id="${u}${id}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"><stop offset="0" stop-color="${a}"/>${c?`<stop offset=".5" stop-color="${c}"/>`:''}<stop offset="1" stop-color="${b}"/></linearGradient>`;
-return`<svg viewBox="0 0 100 100" aria-hidden="true"><defs>${g('p',0,1,1,0,'#E88FB0','#F7B9CE')}${g('a',0,1,1,0,'#F2A93B','#F9C463')}${g('ab',0,0,0,1,'#FBCB6E','#4C93E6','#A8C4F2')}${g('b1',0,0,1,0,'#8FC1FF','#3F7FD6')}${g('b2',0,0,1,0,'#3F7FD6','#7DB4F5')}</defs>${tuile?'<rect x="1" y="1" width="98" height="98" rx="27" fill="#061636" stroke="#123A7A" stroke-width="1.2"/>':''}<g fill="none" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">${Pa.map(p=>`<path ${anim?'class="d" pathLength="1" ':''}d="${p[0]}" stroke="url(#${u}${p[1]})"/>`).join('')}</g>${T.map(d=>`<circle ${anim?'class="dt" ':''}cx="${d[0]}" cy="${d[1]}" r="2.4" fill="${d[2]}"/>`).join('')}<g stroke="#fff" stroke-width="2.2">${N.map(d=>`<circle ${anim?'class="nd" ':''}cx="${d[0]}" cy="${d[1]}" r="6" fill="${d[2]}"/>`).join('')}</g></svg>`};
+const r=(id,a,b)=>`<radialGradient id="${u}${id}" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></radialGradient>`;
+// La barre du bas est parfaitement horizontale : son dégradé doit être exprimé en coordonnées absolues, sinon elle disparaît
+const bar=`<linearGradient id="${u}b1" gradientUnits="userSpaceOnUse" x1="28" y1="0" x2="48.4" y2="0"><stop offset="0" stop-color="#EEF5FE"/><stop offset=".25" stop-color="#8FC1FF"/><stop offset="1" stop-color="#3677C8"/></linearGradient>`;
+const defs=`<defs>${g('p',0,1,1,0,'#E88FB0','#F7B9CE')}${g('a',0,1,1,0,'#F2A93B','#F9C463')}${g('ab',0,0,0,1,'#FBCB6E','#4C93E6','#A8C4F2')}${bar}${g('b2',0,0,1,0,'#3F7FD6','#7DB4F5')}${r('np','#F7B3CB','#DC7DA6')}${r('na','#FFCB66','#D4903C')}${r('nb','#7FB4EF','#2F68B8')}${tuile?`<linearGradient id="${u}t" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A2557"/><stop offset="1" stop-color="#051532"/></linearGradient><radialGradient id="${u}h" cx=".85" cy=".08" r=".6"><stop offset="0" stop-color="#4C82D8" stop-opacity=".22"/><stop offset="1" stop-color="#4C82D8" stop-opacity="0"/></radialGradient>`:''}</defs>`;
+const fill=c=>c[0]==='#'?c:`url(#${u}${c})`;
+return`<svg viewBox="0 0 100 100" aria-hidden="true">${defs}${tuile?`<rect x="1" y="1" width="98" height="98" rx="27" fill="url(#${u}t)"/><rect x="1" y="1" width="98" height="98" rx="27" fill="url(#${u}h)" stroke="#173F82" stroke-width="1.2"/>`:''}<g fill="none" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">${Pa.map(p=>`<path ${anim?'class="d" pathLength="1" ':''}d="${p[0]}" stroke="url(#${u}${p[1]})"/>`).join('')}</g>${T.map(d=>`<circle ${anim?'class="dt" ':''}cx="${d[0]}" cy="${d[1]}" r="2.4" fill="${d[2]}"/>`).join('')}<g stroke="#fff" stroke-width="2.2">${N.map(d=>`<circle ${anim?'class="nd" ':''}cx="${d[0]}" cy="${d[1]}" r="6" fill="${fill(d[2])}"/>`).join('')}</g></svg>`};
 // Écran de chargement (une seule fois par visite)
 const first=!calm&&!ss.g('sp'),t0=Date.now();
 if(first){ss.s('sp','1');B.insertAdjacentHTML('afterbegin',`<div class="sp" aria-hidden="true">${mark('s',1,1)}</div>`)}
@@ -82,7 +87,13 @@ fonct:()=>`<div class="tl">${[1,2,3,4].map(i=>`<section class="fr rv" style="--c
 apropos:()=>`<section class="pg w rv">${eb('À propos')}<h2>${E('a.t')}</h2><p>${E('a.p')}</p>${maj()}</section>`,
 aide:()=>`<section class="pg w">${eb('Aide','var(--blue)')}<h2>Questions fréquentes</h2>${faq(6)}<p style="margin-top:36px">Votre question n’y est pas ? <a class="more" style="margin:0" href="contact.html">Écrivez-nous</a></p>${maj()}<div class="tools">${tb('data-print','print','Imprimer')}</div></section>`,
 // Tant que l'adresse de contact est la valeur par défaut, on ne l'affiche pas comme un vrai lien
-contact:()=>{const m=t('c.mail'),ok=m&&!/exemple\.fr$/.test(m);return`<section class="pg w rv">${eb('Contact','var(--pink)')}<h2>Contact</h2><p>${E('c.p')}</p><p>${ok?`<a class="mail" href="mailto:${E('c.mail')}">${E('c.mail')}</a>`:'Adresse de contact bientôt disponible.'}</p>${ok?`<div class="tools">${tb(`data-copy="${E('c.mail')}"`,'copy','Copier l’adresse')}</div>`:''}${maj()}</section>`},
+contact:()=>{const m=t('c.mail'),ok=m&&!/exemple\.fr$/.test(m);return`<section class="pg w rv">${eb('Contact')}<h2>Contact</h2><p>${E('c.p')}</p>
+<form class="cf" novalidate><div class="g2"><div class="fd"><label for="cn">Nom <span>(facultatif)</span></label><input id="cn" name="nom" autocomplete="name" maxlength="80"><p class="er"></p></div><div class="fd"><label for="ce">Email</label><input id="ce" name="email" type="email" autocomplete="email" required><p class="er"></p></div></div>
+<div class="fd"><label for="cs">Sujet</label><select id="cs" name="sujet"><option>Une question</option><option>Une idée</option><option>Un bug</option><option>Autre</option></select></div>
+<div class="fd"><label for="cm">Message</label><textarea id="cm" name="message" rows="6" maxlength="4000" required></textarea><p class="er"></p><div class="cnt">0 / 4000</div></div>
+<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div><button class="cta" type="submit"><span>Envoyer le message</span></button></div><p class="fm" role="alert" aria-live="polite"></p></form>
+${ok?`<p class="alt">Vous préférez écrire directement ? <a href="mailto:${E('c.mail')}">${E('c.mail')}</a> ${tb(`data-copy="${E('c.mail')}"`,'copy','Copier')}</p>`:''}${maj()}</section>`},
 actus:()=>`<section class="pg w">${eb('Actualités','var(--amber)')}<h2>Actualités</h2><div class="cards" id="al"><p>Chargement…</p></div></section>`,
 actu:()=>`<section class="pg w art"><div id="ar"><p>Chargement…</p></div></section>`,
 mentions:()=>`<section class="pg w art">${eb('Légal')}<h2>${E('m.t')}</h2>${mdL(t('m.p'))}${maj()}<div class="tools">${tb('data-print','print','Imprimer')}</div></section>`,
@@ -141,6 +152,27 @@ if(error&&error.code!=='23505'){fail('L’inscription n’a pas abouti. Vérifie
 f.reset();const dup=!!error;
 m.textContent=dup?'Vous êtes déjà sur la liste.':'Inscription enregistrée.';m.className='fm good';
 confirmDlg(dup?'Vous êtes déjà inscrit·e':'C’est noté !',dup?'Cette adresse est déjà sur la liste. Vous serez prévenu·e dès l’ouverture.':'Vous serez prévenu·e dès l’ouverture. Un seul message, rien d’autre.')}));
+// Formulaire de contact
+const cf=$('.cf');
+if(cf){const ta=cf.elements.message,cnt=$('.cnt');ta.addEventListener('input',()=>cnt.textContent=ta.value.length+' / 4000');
+cf.addEventListener('submit',async e=>{e.preventDefault();
+const m=cf.querySelector('.fm'),b=cf.querySelector('button.cta'),sp=b.querySelector('span'),lab=sp.textContent;
+cf.querySelectorAll('.fd').forEach(d=>{d.classList.remove('bad');d.querySelector('.er')&&(d.querySelector('.er').textContent='');d.querySelectorAll('[aria-invalid]').forEach(i=>i.removeAttribute('aria-invalid'))});
+m.className='fm';m.textContent='';
+if(cf.elements.website.value){cf.reset();return}
+const v={nom:cf.elements.nom.value.trim().slice(0,80),email:cf.elements.email.value.trim().toLowerCase(),sujet:cf.elements.sujet.value,message:ta.value.trim()};
+let first=null;const bad=(n,s)=>{const i=cf.elements[n],d=i.closest('.fd');d.classList.add('bad');d.querySelector('.er').textContent=s;i.setAttribute('aria-invalid','true');first=first||i};
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email))bad('email','Cette adresse email ne semble pas valide.');
+if(v.message.length<10)bad('message','Votre message est un peu court (10 caractères minimum).');
+if(first){cf.classList.remove('shake');void cf.offsetWidth;cf.classList.add('shake');first.focus();return}
+if(Date.now()-(+ss.g('cft')||0)<30000){m.textContent='Message déjà envoyé à l’instant. Patientez quelques secondes avant d’en envoyer un autre.';m.className='fm err';return}
+b.classList.add('ld');sp.textContent='Envoi…';
+let error;try{const s=src();({error}=await sb.from('messages').insert(s?{...v,source:s}:v));
+if(error&&s&&/source|column|PGRST204|42703/i.test((error.code||'')+(error.message||''))){({error}=await sb.from('messages').insert(v))}}catch(x){error={code:'net'}}
+b.classList.remove('ld');sp.textContent=lab;
+if(error){m.textContent='Le message n’a pas pu être envoyé. Vérifiez votre connexion puis réessayez.';m.className='fm err';cf.classList.remove('shake');void cf.offsetWidth;cf.classList.add('shake');toast('Message non envoyé.','err');return}
+ss.s('cft',Date.now());cf.reset();cnt.textContent='0 / 4000';m.textContent='Message envoyé. Merci !';m.className='fm good';
+confirmDlg('Message envoyé','Merci ! Nous vous répondons à l’adresse indiquée dès que possible.')})}
 // FAQ dépliable
 const toggle=(q,o)=>{q.classList.toggle('open',o);q.querySelector('button').setAttribute('aria-expanded',o)};
 document.addEventListener('click',e=>{const b=e.target.closest('.qa button');if(b){const q=b.closest('.qa');toggle(q,!q.classList.contains('open'))}});
@@ -177,7 +209,7 @@ addEventListener('scroll',onS,{passive:true});addEventListener('resize',onS);onS
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
 const reveal=()=>document.querySelectorAll('.rv:not(.in)').forEach(n=>io.observe(n));reveal();
 // Fin du chargement
-if(first){await wait(Math.max(0,1500-(Date.now()-t0)));const s=$('.sp');s.classList.add('out');setTimeout(()=>s.remove(),600)}
+if(first){const s=$('.sp');let fin=0;const bye=()=>{if(fin)return;fin=1;s.classList.add('out');setTimeout(()=>s.remove(),700)};s.onclick=bye;await wait(Math.max(0,4200-(Date.now()-t0)));bye()}
 B.classList.add('go');
 // Actualités
 const TAGS={nouveaute:'Nouveauté',travaux:'Travaux',info:'Info',version:'Mise à jour'};

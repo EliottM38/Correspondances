@@ -1,12 +1,15 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Espace interne · Correspondances</title>
-<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Espace interne · Correspondances</title><link rel="icon" href="/logo.svg" type="image/svg+xml">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="/espace-9xk4.css"></head>
 <body data-page="admin">
-<div id="login"><div class="lc"><span class="br">Correspon<i>dances</i></span><h1>Espace interne</h1><p>Connexion réservée à l’équipe, avec votre compte Discord.</p><a class="cta" id="dc"><i class="fa-brands fa-discord"></i> Se connecter avec Discord</a><p id="lm"></p></div></div>
+<div id="login"><div class="lc"><img src="/logo.svg" alt=""><h1>Espace interne</h1><p>Connexion réservée à l’équipe, avec votre compte Discord.</p><a class="cta" id="dc"><i class="fa-brands fa-discord"></i> Se connecter avec Discord</a><p id="lm"></p></div></div>
 <div id="app" hidden>
-<header><div class="w hd"><span class="br" data-go="home">Correspon<i>dances</i><small>Interne</small></span>
-<div class="rt"><span class="who"><b id="who"></b> · <span id="rl"></span></span><button class="pb" id="th"></button><a class="pb" href="/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Site</a><button class="pb" id="lo"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</button></div></div>
-<div class="w"><nav id="nv"></nav></div></header>
-<main id="mn"></main></div><div id="toast"></div>
-<script src="/api/config"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="/site.js"></script><script src="/espace-admin.js?v=3"></script>
+<header><div class="w nv"><a class="br" data-go="home"><img src="/logo.svg" alt=""><span>Correspondances</span><em class="bd">Interne</em></a>
+<div class="hb"><span class="who"><b id="who"></b> · <span id="rl"></span></span>
+<button type="button" class="ib" id="th" aria-label="Changer de thème"><span class="i-sun"></span><span class="i-moon"></span></button>
+<a class="ib" href="/" target="_blank" rel="noopener" aria-label="Voir le site public" id="si"></a>
+<button type="button" class="ib" id="lo" aria-label="Se déconnecter"></button></div></div>
+<div class="sb"><div class="w"><nav id="nv" aria-label="Sections"></nav></div></div></header>
+<main id="mn"></main></div><div id="toast" role="status"></div>
+<script src="/api/config"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="/site.js?v=5"></script><script src="/espace-admin.js?v=4"></script>
 </body></html>

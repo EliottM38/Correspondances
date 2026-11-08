@@ -15,14 +15,14 @@ if(m=k.match(/^([qr])(\d)$/))return(m[1]=='q'?'Question ':'Réponse ')+m[2];retu
 const grp=k=>/^(hero|cta)/.test(k)?'Accueil':/^d\d/.test(k)?'Démo de l’app':/^f\d/.test(k)?'Fonctionnalités':/^a\./.test(k)?'À propos':/^[qr]\d/.test(k)?'Aide (FAQ)':/^c\./.test(k)?'Contact':/^m\./.test(k)?'Mentions légales':null;
 const v=k=>C[k]??D[k]??'';
 // Pastille d'icône : colorée si active, grisée sinon (texte toujours lisible)
-const ic=(i,col,on=true)=>`<span class="ic${on?'':' off'}"${on?` style="background:${col}"`:''}><i class="fa-solid ${i}"></i></span>`;
+const ic=(i,col,on=true)=>`<span class="ic${on?'':' off'}"${on?` style="--c:${col}"`:''}><i class="fa-solid ${i}"></i></span>`;
 const row=(i,col,h,g,l)=>`<div class="row">${ic(i,col)}<p>${h}</p><button class="b" data-go="${g}">${l}</button></div>`;
 const V={
 home(){const hr=new Date().getHours();return`<h1>${hr<18?'Bonjour':'Bonsoir'}, ${esc(me.nom)}</h1><p class="clk"><i class="fa-solid fa-clock"></i>Il est actuellement <b id="clk"></b></p>
 ${row('fa-envelope','var(--ac)',`<b class="num">${S.inscrits??'…'}</b> inscrit(s) en liste d’attente`,'liste','Voir la liste')}
 ${row('fa-users','var(--b)',`<b class="num">${S.comptes??'…'}</b> compte(s) dans l’app, <b class="num">${S.avis??'…'}</b> avis reçu(s)`,'home','Actualiser')}
 ${row('fa-triangle-exclamation','var(--y)',`<b class="num">${S.signalements??'…'}</b> signalement(s) actif(s), <b class="num">${S.annonces??'…'}</b> annonce(s) de ligne`,'home','Actualiser')}
-<div class="tiles">${N.slice(1).filter(n=>!n[3]||isAdm()).map(n=>`<button data-go="${n[0]}"><i class="fa-solid ${n[1]}"></i>${n[2].split(' ')[0]}</button>`).join('')}<a href="/" target="_blank"><i class="fa-solid fa-globe"></i>Site</a></div>`},
+<div class="tiles">${N.slice(1).filter(n=>!n[3]||isAdm()).map((n,k)=>`<button data-go="${n[0]}" style="--c:${['var(--pink)','var(--amber)','var(--blue)','var(--lav)'][k%4]}"><i class="fa-solid ${n[1]}"></i>${n[2]}</button>`).join('')}</div>`},
 textes(){const g={};Object.keys(D).forEach(k=>{const n=grp(k);if(n)(g[n]=g[n]||[]).push(k)});
 return`<h1>Textes du site</h1><p class="sub">Un champ non modifié garde le texte par défaut.</p>`+Object.entries(g).map(([n,ks])=>`<section class="card"><h3>${n}</h3>${ks.map(k=>`<label>${lab(k)}<textarea data-k="${k}" rows="${v(k).length>70?3:1}" ${can()?'':'disabled'}>${esc(v(k))}</textarea></label>`).join('')}</section>`).join('')+(can()?`<button class="b go" id="sv">Enregistrer les textes</button>`:'')},
 captures(){return`<h1>Captures d’écran</h1><p class="sub">Elles défilent dans le téléphone de l’accueil, dans cet ordre. PNG, JPEG ou WebP, 4 Mo maximum.</p><div class="shots">${[1,2,3].map(i=>{const u=C['shot'+i];return`<section class="card"><h3>Capture ${i}</h3><div class="pv">${u?`<img src="${esc(u)}" alt="">`:'<span>Aucune image</span>'}</div>${can()?`<label class="b" style="cursor:pointer">${u?'Remplacer':'Choisir une image'}<input type="file" accept="image/png,image/jpeg,image/webp" data-up="${i}" hidden></label>${u?`<button class="b" data-rm="${i}">Retirer</button>`:''}`:''}</section>`}).join('')}</div>`},
@@ -65,7 +65,7 @@ statistiques(){return`<h1>Statistiques</h1><p class="sub">30 derniers jours.</p>
 reglages(){const g=k=>RG[k],x=ed&&(ed.k==='r'||ed.k==='s')?ed.v:null;return`<h1>Réglages de l’app</h1><p class="sub">Publiés dans l’app, qui les relit toutes les 2 minutes.</p>
 <section class="card"><h3>Maintenance et version</h3>${fc('maintenance_actif','Mettre l’app en maintenance (écran bloquant)',g('maintenance_actif')===true)}${ft('maintenance_message','Message affiché',g('maintenance_message')||'',3)}${fi('version_min','Version minimale (ex. 1.2) : en dessous, mise à jour obligatoire',g('version_min')||'')}<div style="margin-top:16px"><button class="b go" id="sr">Publier</button></div></section>
 <section class="card"><h3>Réseaux (villes proposées)</h3>${bar('r','Nouveau réseau')}${x&&ed.k==='r'?formBox('r',fi('code','Code',x.code)+fi('ville','Ville',x.ville)+fi('nom','Nom du réseau',x.nom)):''}<div style="margin-top:14px">${RS.map(r=>`<div class="row"><p><b style="font-size:15px">${esc(r.nom)}</b><br><small>${esc(r.code)} · ${esc(r.ville)}</small></p>${actions('r',r.id)}</div>`).join('')||'<p class="sub">Aucun réseau.</p>'}</div></section>
-<section class="card"><h3>Styles de lignes</h3>${bar('s','Nouveau style')}${x&&ed.k==='s'?formBox('s',fi('ville','Ville',x.ville)+fi('ligne','Ligne',x.ligne)+fs('forme','Forme',x.forme,[['cercle','Cercle'],['rectangleArrondi','Rectangle arrondi']])+fi('couleur','Couleur (hexadécimal, ex. FFCD00)',x.couleur)):''}<div style="margin-top:14px">${SS.map(s=>`<div class="row"><span class="ic" style="background:#${esc(s.couleur||'7C93B3')}"></span><p><b style="font-size:15px">Ligne ${esc(s.ligne)}</b><br><small>${esc(s.ville)} · ${esc(s.forme)}</small></p>${actions('s',s.id)}</div>`).join('')||'<p class="sub">Aucun style.</p>'}</div></section>`},
+<section class="card"><h3>Styles de lignes</h3>${bar('s','Nouveau style')}${x&&ed.k==='s'?formBox('s',fi('ville','Ville',x.ville)+fi('ligne','Ligne',x.ligne)+fs('forme','Forme',x.forme,[['cercle','Cercle'],['rectangleArrondi','Rectangle arrondi']])+fi('couleur','Couleur (hexadécimal, ex. FFCD00)',x.couleur)):''}<div style="margin-top:14px">${SS.map(s=>`<div class="row"><span class="ic" style="--c:#${esc(s.couleur||'7C93B3')}"></span><p><b style="font-size:15px">Ligne ${esc(s.ligne)}</b><br><small>${esc(s.ville)} · ${esc(s.forme)}</small></p>${actions('s',s.id)}</div>`).join('')||'<p class="sub">Aucun style.</p>'}</div></section>`},
 equipe(){const o=me.role==='proprietaire';return`<h1>Équipe</h1><p class="sub">Les rôles viennent de Discord et sont relus toutes les 30 secondes. Pour retirer un accès, retirez le rôle sur Discord.</p>
 <section class="card"><h3>Membres</h3>${tab(['','Nom','Rôle','Dernière connexion',''],(EQ.membres||[]).map(m=>`<tr><td>${m.avatar?`<img src="${esc(m.avatar)}" width="28" height="28" style="border-radius:50%" alt="">`:''}</td><td>${esc(m.nom)}</td><td>${esc(m.role)}${m.actif?'':' (inactif)'}</td><td>${m.derniere_connexion?new Date(m.derniere_connexion).toLocaleString('fr-FR'):''}</td><td><button class="b" data-dec="${m.id}">Déconnecter</button></td></tr>`),'Aucun membre.')}</section>
 <section class="card"><h3>Rôles Discord → rôles de l’admin</h3><p class="sub" style="margin:6px 0 0">Une ligne par rôle : identifiant | nom | rôle | priorité (1 = le plus fort). Rôles possibles : proprietaire, administrateur, moderateur, editeur, lecture.</p><textarea id="rm" rows="6" ${o?'':'disabled'}>${esc((EQ.roles||[]).map(r=>[r.discord_role_id,r.nom||'',r.role,r.priorite].join(' | ')).join('\n'))}</textarea>${o?'<div style="margin-top:14px"><button class="b go" id="sro">Enregistrer</button></div>':''}</section>
@@ -111,16 +111,21 @@ const LD={actus:async()=>{AC=await api('actus_lire')},annonces:async()=>{A=await
 reglages:async()=>{const[g,r,s]=await Promise.all([api('reglages_lire'),api('reseaux_lire'),api('styles_lire')]);RG={};g.forEach(x=>RG[x.cle]=x.valeur);RS=r.map(x=>({...x,id:x.code}));SS=s},equipe:async()=>{EQ=await api('equipe_lire')}};
 // Dessine la page : en-tête de navigation puis contenu
 function draw(p){cur=p;location.hash=p;
-$('#nv').innerHTML=N.filter(n=>!n[3]||isAdm()).map(n=>`<button data-go="${n[0]}" class="${n[0]===p?'on':''}"><i class="fa-solid ${n[1]}"></i><span>${n[2]}</span></button>`).join('');
+$('#nv').innerHTML=N.filter(n=>!n[3]||isAdm()).map(n=>`<button type="button" data-go="${n[0]}" class="${n[0]===p?'on':''}"${n[0]===p?' aria-current="page"':''}>${n[2]}</button>`).join('');
 $('#mn').innerHTML=V[p]();bind();const o=$('#nv .on');if(o)o.scrollIntoView({inline:'center',block:'nearest'})}
 // L'accueil s'affiche tout de suite (chiffres « … »), puis se met à jour quand les stats arrivent
 async function go(p){if(!V[p])p='home';
 if(p==='home'){draw(p);try{await charger();if(cur==='home')draw('home')}catch(e){toast(e.message)}return}
 if(LD[p])try{await LD[p]()}catch(e){toast(e.message)}draw(p)}
 // Thème clair / sombre : même réglage que le site public
+const svg=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 const root=document.documentElement,th=$('#th');
-const setTh=m=>{root.dataset.theme=m;th.innerHTML=`<i class="fa-solid ${m==='light'?'fa-sun':'fa-moon'}"></i> ${m==='light'?'Clair':'Sombre'}`;try{localStorage.setItem('theme',m)}catch{}};
-setTh(root.dataset.theme||'dark');th.onclick=()=>setTh(root.dataset.theme==='light'?'dark':'light');
+th.querySelector('.i-sun').innerHTML=svg('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>');
+th.querySelector('.i-moon').innerHTML=svg('<path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/>');
+$('#si').innerHTML=svg('<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/>');
+$('#lo').innerHTML=svg('<path d="M9 21H5a1 1 0 01-1-1V4a1 1 0 011-1h4M16 17l5-5-5-5M21 12H9"/>');
+const setTh=m=>{root.dataset.theme=m;try{localStorage.setItem('theme',m)}catch{}};
+th.onclick=()=>setTh(root.dataset.theme==='light'?'dark':'light');
 $('#dc').href=API+'?a=login';
 $('#lo').onclick=async()=>{try{await api('deconnexion')}catch{}sessionStorage.removeItem('t');location.reload()};
 (async()=>{if(err)$('#lm').textContent=(ER[err]||'Connexion impossible.')+(detail?' ['+detail+']':'');

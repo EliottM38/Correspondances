@@ -55,7 +55,9 @@ const first=!calm&&!ss.g('sp'),t0=Date.now();
 if(first){ss.s('sp','1');B.insertAdjacentHTML('afterbegin',`<div class="sp" aria-hidden="true">${mark('s',1,1)}</div>`)}
 // Contenu modifiable
 const C={};
-try{const r=await Promise.race([sb.from('site_content').select('key,value'),new Promise((_,j)=>setTimeout(j,1800))]);(r.data||[]).forEach(x=>C[x.key]=x.value)}catch(e){}
+// Dernier contenu reçu, gardé sur l'appareil : si le serveur répond trop lentement, on ne retombe pas sur les textes par défaut
+try{Object.assign(C,JSON.parse(ls.g('sc')||'{}'))}catch(e){}
+try{const r=await Promise.race([sb.from('site_content').select('key,value'),new Promise((_,j)=>setTimeout(j,4000))]);if(r.data){Object.keys(C).forEach(k=>delete C[k]);r.data.forEach(x=>C[x.key]=x.value);ls.s('sc',JSON.stringify(C))}}catch(e){}
 const t=k=>C[k]??D[k]??'',E=k=>escHtml(t(k));
 // Icônes
 const svg=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;

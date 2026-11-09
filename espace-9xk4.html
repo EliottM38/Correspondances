@@ -1,15 +1,19 @@
 <!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Espace interne · Correspondances</title><link rel="icon" href="/logo.svg" type="image/svg+xml">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="/espace-9xk4.css"></head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="/espace-9xk4.css?v=6"></head>
 <body data-page="admin">
-<div id="login"><div class="lc"><img src="/logo.svg" alt=""><h1>Espace interne</h1><p>Connexion réservée à l’équipe, avec votre compte Discord.</p><a class="cta" id="dc"><i class="fa-brands fa-discord"></i> Se connecter avec Discord</a><p id="lm"></p></div></div>
+<div id="login"><div class="lc"><img src="/logo.svg" alt=""><h1>Espace interne</h1><p>Connexion réservée à l’équipe, avec votre compte Discord. La session dure 24 h.</p><a class="cta" id="dc"><i class="fa-brands fa-discord"></i> Se connecter avec Discord</a><p id="lm"></p></div></div>
 <div id="app" hidden>
-<header><div class="w nv"><a class="br" data-go="home"><img src="/logo.svg" alt=""><span>Correspondances</span><em class="bd">Interne</em></a>
-<div class="hb"><span class="who"><b id="who"></b> · <span id="rl"></span></span>
-<button type="button" class="ib" id="th" aria-label="Changer de thème"><span class="i-sun"></span><span class="i-moon"></span></button>
-<a class="ib" href="/" target="_blank" rel="noopener" aria-label="Voir le site public" id="si"></a>
-<button type="button" class="ib" id="lo" aria-label="Se déconnecter"></button></div></div>
-<div class="sb"><div class="w"><nav id="nv" aria-label="Sections"></nav></div></div></header>
-<main id="mn"></main></div><div id="toast" role="status"></div>
-<script src="/api/config"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="/site.js?v=5"></script><script src="/espace-admin.js?v=4"></script>
+<header><div class="w nv"><a class="br" href="#home"><img src="/logo.svg" alt=""><span>Correspondances</span><em class="bk">Interne</em></a>
+<a id="mt" href="#reglages" hidden><i class="fa-solid fa-screwdriver-wrench"></i> <span>Maintenance active</span></a>
+<div class="hr"><span class="who"><b id="who"></b> · <span id="rl"></span></span>
+<button type="button" class="ib" id="rf" title="Actualiser la page" aria-label="Actualiser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 11-3-6.7L21 8M21 3v5h-5"/></svg></button>
+<button type="button" class="ib" id="th" title="Thème clair / sombre" aria-label="Changer de thème"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg></button>
+<a class="ib" href="/" target="_blank" rel="noopener" title="Voir le site public" aria-label="Voir le site public"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg></a>
+<button type="button" class="ib" id="lo" title="Déconnexion" aria-label="Se déconnecter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a1 1 0 01-1-1V4a1 1 0 011-1h4M16 17l5-5-5-5M21 12H9"/></svg></button></div></div>
+<div class="sbar"><div class="w"><nav id="nv" aria-label="Sections"></nav></div></div></header>
+<main id="mn"></main><p id="ms"></p></div>
+<div id="pb"></div><div id="toast" role="status"></div>
+<script src="/api/config"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="/site.js"></script><script src="/espace-admin.js?v=6"></script>
 </body></html>

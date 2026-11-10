@@ -5,5 +5,9 @@
     { "source": "/rss.xml", "destination": "/api/rss" },
     { "source": "/robots.txt", "destination": "/api/robots" }
   ],
-  "headers": [{ "source": "/espace-9xk4(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }]
+  "headers": [
+    { "source": "/espace-9xk4(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/(site.js|style.css)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/fonts/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
+  ]
 }

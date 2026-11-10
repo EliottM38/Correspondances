@@ -157,7 +157,7 @@ try{await api('reglages_ecrire',{rows:[{cle:'maintenance_actif',valeur:on}]});RG
 function bind(){
 $$('[data-mt]').forEach(b=>b.onclick=basculerMt);
 if($('#sv'))$('#sv').onclick=()=>{const rows=[...$$('[data-k]')].filter(f=>f.value!==v(f.dataset.k)||C[f.dataset.k]!=null&&C[f.dataset.k]!==f.value).map(f=>({key:f.dataset.k,value:f.value}));if(!rows.length)return toast('Rien à enregistrer.');ecrire(rows)};
-$$('[data-up]').forEach(f=>f.onchange=async()=>{try{const x=f.files[0],{url}=await api('capture_envoyer',{type:x.type,donnees:await b64(x)});if(await ecrire([{key:'shot'+f.dataset.up,value:url}]))draw(cur)}catch(e){toast('Envoi impossible : '+e.message)}});
+$$('[data-up]').forEach(f=>f.onchange=async()=>{try{const x=f.files[0],{url}=await api('capture_envoyer',{type:x.type,donnees:await b64(x)});if(await ecrire([{key:'shot'+f.dataset.up,value:url}]))draw(cur)}catch(e){toast('Envoi impossible : '+e.message);const k=$('#ck');if(k)k.innerHTML='<b style="color:var(--er)">Envoi impossible : '+esc(e.message||e)+'</b>'}});
 $$('[data-rm]').forEach(b=>b.onclick=async()=>{if(await ecrire([{key:'shot'+b.dataset.rm,value:''}]))draw(cur)});
 $$('[data-logo]').forEach(f=>f.onchange=async()=>{const code=f.dataset.logo;try{toast('Envoi du logo…');const image=await toPng(f.files[0]);await api('logos_ecrire',{reseau:code,image});parseLogos(await api('logos_lire'));toast('Logo enregistré. Il apparaîtra dans l’app d’ici 1 h au plus.');draw(cur)}catch(e){toast('Échec : '+e.message)}});
 if($('#lga'))$('#lga').onclick=()=>{const c=$('#lgn').value.trim().toUpperCase();if(!/^[A-Z0-9_]{1,20}$/.test(c))return toast('Code invalide : lettres et chiffres seulement (ex. TAG).');if(!logoCodes().includes(c))LX.push(c);draw(cur)};

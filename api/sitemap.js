@@ -1,5 +1,5 @@
 const { get, origin, xml } = require('./_sb');
-const PAGES = ['/', '/fonctionnalites.html', '/a-propos.html', '/actualites.html', '/aide.html', '/contact.html', '/mentions.html', '/confidentialite.html'];
+const PAGES = ['/', '/fonctionnalites.html', '/a-propos.html', '/actualites.html', '/aide.html', '/contact.html', '/mentions.html', '/confidentialite.html', '/cgu.html', '/licences.html'];
 module.exports = async (req, res) => {
   const o = origin(req);
   let actus = [];

@@ -1,13 +1,18 @@
 {
-  "rewrites": [
-    { "source": "/espace-9xk4", "destination": "/espace-9xk4.html" },
-    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
-    { "source": "/rss.xml", "destination": "/api/rss" },
-    { "source": "/robots.txt", "destination": "/api/robots" }
-  ],
+  "redirects": [{ "source": "/index.html", "destination": "/", "permanent": true }],
+  "rewrites": [{ "source": "/espace-9xk4", "destination": "/espace-9xk4.html" }],
   "headers": [
-    { "source": "/espace-9xk4(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
-    { "source": "/(site.js|style.css)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
-    { "source": "/fonts/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
+        { "key": "Permissions-Policy", "value": "geolocation=(), camera=(), microphone=()" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'" }
+      ]
+    },
+    { "source": "/espace-9xk4(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
   ]
 }

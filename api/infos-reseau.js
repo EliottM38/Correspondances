@@ -14,8 +14,17 @@ module.exports = async (req, res) => {
     if (rows[0]?.value) {
       const value = JSON.parse(rows[0].value);
       if (value && typeof value === 'object' && !Array.isArray(value)) {
-        for (const k of ['nom', 'description', 'lien', 'libelleLien', 'iconeParking', 'iconeAgence', 'annonceTitre', 'annonceTexte', 'annonceDebut', 'annonceFin', 'horaires', 'ficheHoraire', 'photo', 'reseau']) {
+        for (const k of ['nom', 'description', 'lien', 'libelleLien', 'iconeParking', 'iconeAgence', 'annonceTitre', 'annonceTexte', 'annonceDebut', 'annonceFin', 'horaires', 'photo', 'reseau', 'plan', 'planDescription']) {
           if (typeof value[k] === 'string') data[k] = value[k].slice(0, 4000);
+        }
+        if (['parking', 'agence'].includes(type) && Array.isArray(value.horairesHebdo) && value.horairesHebdo.length === 7) {
+          const jours = value.horairesHebdo.map(j => {
+            if (!j || !['inconnu','ferme','ouvert'].includes(j.etat) || !Array.isArray(j.plages) || j.plages.length > 2) return null;
+            if (!j.plages.every(p => p && /^([01]\d|2[0-3]):[0-5]\d$/.test(p.debut) && /^([01]\d|2[0-3]):[0-5]\d$/.test(p.fin))) return null;
+            if ((j.etat === 'ouvert') !== (j.plages.length > 0)) return null;
+            return { etat:j.etat, plages:j.plages.map(p=>({debut:p.debut,fin:p.fin})) };
+          });
+          if (jours.every(Boolean)) data.horairesHebdo = jours;
         }
         if (type === 'reseau') data.annonceActif = value.annonceActif === true;
         if (Number.isFinite(value.latitude) && Number.isFinite(value.longitude) && Math.abs(value.latitude) <= 90 && Math.abs(value.longitude) <= 180) {

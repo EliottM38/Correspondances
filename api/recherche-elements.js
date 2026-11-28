@@ -35,14 +35,14 @@ module.exports = async (req, res) => {
     if (type === 'arret') {
       const groupes = [], parNom = new Map();
       for (const r of resultats) {
-        const cle = cleNom(r.nom) + '|' + cleNom(r.ville), candidats = parNom.get(cle) || [];
-        const proche = candidats.find(g => Math.hypot((g.latitude-r.latitude)*111320, (g.longitude-r.longitude)*111320*Math.cos(r.latitude*Math.PI/180)) <= 250);
-        if (proche) { if (!proche.ids.includes(r.id)) proche.ids.push(r.id); }
-        else { const g = { ...r, ids: [r.id] }; groupes.push(g); candidats.push(g); parNom.set(cle, candidats); }
+        const cle = cleNom(r.nom), candidats = parNom.get(cle) || [];
+        const proche = candidats.find(g => Math.hypot((g.latitude-r.latitude)*111320, (g.longitude-r.longitude)*111320*Math.cos(r.latitude*Math.PI/180)) <= (cleNom(g.ville) === cleNom(r.ville) ? 250 : 100));
+        if (proche) { if (!proche.ids.includes(r.id)) proche.ids.push(r.id); if (r.ville && !proche.villes.includes(r.ville)) proche.villes.push(r.ville); }
+        else { const g = { ...r, ids: [r.id], villes: r.ville ? [r.ville] : [] }; groupes.push(g); candidats.push(g); parNom.set(cle, candidats); }
       }
       resultats.splice(0, resultats.length, ...groupes);
     }
-    const correspond = r => { const texte = normaliser([r.nom, r.ville, r.adresse, ...(r.ids || [r.id])].join(' ')); return mots.every(m => texte.includes(m)); };
+    const correspond = r => { const texte = normaliser([r.nom, r.ville, ...(r.villes || []), r.adresse, ...(r.ids || [r.id])].join(' ')); return mots.every(m => texte.includes(m)); };
     resultats.splice(0, resultats.length, ...resultats.filter(correspond));
     resultats.sort((a, b) => {
       const debutA = normaliser(a.nom).startsWith(normaliser(query)), debutB = normaliser(b.nom).startsWith(normaliser(query));

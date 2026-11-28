@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'GET') return res.status(405).json({ erreur: 'Méthode non autorisée' });
   const type = String(req.query.type || '');
   const id = String(req.query.id || '');
-  if (!['arret', 'reseau', 'parking', 'agence'].includes(type) || !/^[A-Za-z0-9_:-]{1,100}$/.test(id)) {
+  if (!['arret', 'reseau', 'parking', 'agence', 'velobox'].includes(type) || !/^[A-Za-z0-9_:-]{1,100}$/.test(id)) {
     return res.status(400).json({ erreur: 'Identifiant invalide' });
   }
   try {
@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     if (rows[0]?.value) {
       const value = JSON.parse(rows[0].value);
       if (value && typeof value === 'object' && !Array.isArray(value)) {
-        for (const k of ['nom', 'description', 'lien', 'libelleLien', 'iconeParking', 'iconeAgence', 'annonceTitre', 'annonceTexte', 'annonceDebut', 'annonceFin']) {
+        for (const k of ['nom', 'description', 'lien', 'libelleLien', 'iconeParking', 'iconeAgence', 'annonceTitre', 'annonceTexte', 'annonceDebut', 'annonceFin', 'horaires', 'ficheHoraire', 'photo', 'reseau']) {
           if (typeof value[k] === 'string') data[k] = value[k].slice(0, 4000);
         }
         if (type === 'reseau') data.annonceActif = value.annonceActif === true;

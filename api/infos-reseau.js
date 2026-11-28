@@ -27,7 +27,13 @@ module.exports = async (req, res) => {
           if (jours.every(Boolean)) data.horairesHebdo = jours;
         }
         if (type === 'arret' && Array.isArray(value.planPoints)) {
-          data.planPoints = value.planPoints.slice(0,100).filter(p => p && typeof p.texte === 'string' && p.texte.trim() && Number.isFinite(p.latitude) && Math.abs(p.latitude) <= 90 && Number.isFinite(p.longitude) && Math.abs(p.longitude) <= 180).map(p => ({ texte:p.texte.slice(0,100), latitude:p.latitude, longitude:p.longitude }));
+          data.planPoints = value.planPoints.slice(0,100).filter(p => p && typeof p.texte === 'string' && p.texte.trim() && Number.isFinite(p.latitude) && Math.abs(p.latitude) <= 90 && Number.isFinite(p.longitude) && Math.abs(p.longitude) <= 180).map(p => ({
+            texte:p.texte.slice(0,100), latitude:p.latitude, longitude:p.longitude,
+            direction:typeof p.direction === 'string' ? p.direction.slice(0,120) : '',
+            lignes:(Array.isArray(p.lignes) ? p.lignes : []).slice(0,30).filter(l => l && typeof l.id === 'string' && /^[A-Za-z0-9_:-]{1,100}$/.test(l.id) && typeof l.nom === 'string' && l.nom.trim()).map(l => ({
+              id:l.id, nom:l.nom.slice(0,30), couleur:/^[a-f0-9]{6}$/i.test(l.couleur||'') ? l.couleur : '', couleurTexte:/^[a-f0-9]{6}$/i.test(l.couleurTexte||'') ? l.couleurTexte : '', mode:typeof l.mode === 'string' ? l.mode.slice(0,30) : '', direction:typeof l.direction === 'string' ? l.direction.slice(0,120) : ''
+            }))
+          }));
         }
         if (type === 'reseau') data.annonceActif = value.annonceActif === true;
         if (Number.isFinite(value.latitude) && Number.isFinite(value.longitude) && Math.abs(value.latitude) <= 90 && Math.abs(value.longitude) <= 180) {

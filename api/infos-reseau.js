@@ -26,6 +26,9 @@ module.exports = async (req, res) => {
           });
           if (jours.every(Boolean)) data.horairesHebdo = jours;
         }
+        if (type === 'arret' && Array.isArray(value.planPoints)) {
+          data.planPoints = value.planPoints.slice(0,100).filter(p => p && typeof p.texte === 'string' && p.texte.trim() && Number.isFinite(p.latitude) && Math.abs(p.latitude) <= 90 && Number.isFinite(p.longitude) && Math.abs(p.longitude) <= 180).map(p => ({ texte:p.texte.slice(0,100), latitude:p.latitude, longitude:p.longitude }));
+        }
         if (type === 'reseau') data.annonceActif = value.annonceActif === true;
         if (Number.isFinite(value.latitude) && Number.isFinite(value.longitude) && Math.abs(value.latitude) <= 90 && Math.abs(value.longitude) <= 180) {
           data.latitude = value.latitude; data.longitude = value.longitude;

@@ -14,9 +14,10 @@ module.exports = async (req, res) => {
     if (rows[0]?.value) {
       const value = JSON.parse(rows[0].value);
       if (value && typeof value === 'object' && !Array.isArray(value)) {
-        for (const k of ['nom', 'description', 'lien', 'libelleLien']) {
+        for (const k of ['nom', 'description', 'lien', 'libelleLien', 'iconeParking', 'iconeAgence', 'annonceTitre', 'annonceTexte', 'annonceDebut', 'annonceFin']) {
           if (typeof value[k] === 'string') data[k] = value[k].slice(0, 4000);
         }
+        if (type === 'reseau') data.annonceActif = value.annonceActif === true;
         if (Number.isFinite(value.latitude) && Number.isFinite(value.longitude) && Math.abs(value.latitude) <= 90 && Math.abs(value.longitude) <= 180) {
           data.latitude = value.latitude; data.longitude = value.longitude;
         }

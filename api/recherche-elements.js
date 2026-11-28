@@ -33,6 +33,16 @@ module.exports = async (req, res) => {
       if (!mots.every(m => texte.includes(m))) continue;
       resultats.push({ id, nom, ville, adresse, latitude: c[1], longitude: c[0] });
     }
+    if (type === 'arret') {
+      const groupes = [];
+      for (const r of resultats) {
+        const proche = groupes.find(g => normaliser(g.nom) === normaliser(r.nom) && normaliser(g.ville) === normaliser(r.ville) &&
+          Math.hypot((g.latitude-r.latitude)*111320, (g.longitude-r.longitude)*111320*Math.cos(r.latitude*Math.PI/180)) <= 250);
+        if (proche) { if (!proche.ids.includes(r.id)) proche.ids.push(r.id); }
+        else groupes.push({ ...r, ids: [r.id] });
+      }
+      resultats.splice(0, resultats.length, ...groupes);
+    }
     resultats.sort((a, b) => {
       const debutA = normaliser(a.nom).startsWith(normaliser(query)), debutB = normaliser(b.nom).startsWith(normaliser(query));
       return debutA !== debutB ? (debutA ? -1 : 1) : a.nom.localeCompare(b.nom, 'fr', { numeric: true }) || a.ville.localeCompare(b.ville, 'fr');

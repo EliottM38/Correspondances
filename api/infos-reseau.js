@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     if (rows[0]?.value) {
       const value = JSON.parse(rows[0].value);
       if (value && typeof value === 'object' && !Array.isArray(value)) {
-        for (const k of ['nom', 'description', 'lien', 'libelleLien', 'iconeParking', 'iconeAgence', 'annonceTitre', 'annonceTexte', 'annonceDebut', 'annonceFin', 'horaires', 'photo', 'reseau', 'plan', 'planDescription']) {
+        for (const k of ['nom', 'description', 'lien', 'libelleLien', 'iconeParking', 'iconeAgence', 'annonceTitre', 'annonceTexte', 'annonceDebut', 'annonceFin', 'horaires', 'photo', 'reseau', 'plan', 'planPDF', 'planDescription']) {
           if (typeof value[k] === 'string') data[k] = value[k].slice(0, 4000);
         }
         if (['parking', 'agence'].includes(type) && Array.isArray(value.horairesHebdo) && value.horairesHebdo.length === 7) {
